@@ -1,4 +1,4 @@
-# SpiffyAuthorize
+# SpiffyAuthorize [![Master Branch Build Status](https://secure.travis-ci.org/spiffyjr/spiffy-authorize.png?branch=master)](http://travis-ci.org/spiffyjr/spiffy-authorize)
 
 SpiffyAuthorize is an authorization module for SpiffyCms, however, this module functions entirely as a standalone
 module as well.
