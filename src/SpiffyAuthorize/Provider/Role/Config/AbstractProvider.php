@@ -20,7 +20,7 @@ use Zend\EventManager\ListenerAggregateTrait;
  *
  * A numeric index will be treated as a role with no children.
  */
-abstract class AbstractConfig implements ProviderInterface
+abstract class AbstractProvider implements ProviderInterface
 {
     use ListenerAggregateTrait;
 

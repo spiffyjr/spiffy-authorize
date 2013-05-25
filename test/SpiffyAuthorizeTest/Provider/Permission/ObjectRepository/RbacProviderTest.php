@@ -1,13 +1,13 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Provider\Permission;
+namespace SpiffyAuthorizeTest\Provider\Permission\ObjectRepository;
 
 use Mockery as m;
-use SpiffyAuthorize\Provider\Permission;
-use SpiffyAuthorize\Service\Rbac;
+use SpiffyAuthorize\Provider\Permission\ObjectRepository\RbacProvider;
+use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset;
 
-class ObjectRepositoryTest extends \PHPUnit_Framework_TestCase
+class RbacProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function tearDown()
     {
@@ -24,10 +24,10 @@ class ObjectRepositoryTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new Permission\ObjectRepository($or);
+        $permissions = new RbacProvider($or);
         $roles       = new Asset\RbacRoleProvider();
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($roles);
         $service->getEventManager()->attach($permissions);
 
@@ -48,10 +48,10 @@ class ObjectRepositoryTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new Permission\ObjectRepository($or);
+        $permissions = new RbacProvider($or);
         $roles       = new Asset\RbacRoleProvider();
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($roles);
         $service->getEventManager()->attach($permissions);
 
@@ -70,9 +70,9 @@ class ObjectRepositoryTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new Permission\ObjectRepository($or);
+        $permissions = new RbacProvider($or);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($roles);
         $service->getEventManager()->attach($permissions);
 
@@ -92,9 +92,9 @@ class ObjectRepositoryTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new Permission\ObjectRepository($or);
+        $permissions = new RbacProvider($or);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($roles);
         $service->getEventManager()->attach($permissions);
 

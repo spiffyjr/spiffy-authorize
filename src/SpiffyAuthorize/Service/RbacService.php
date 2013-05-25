@@ -9,7 +9,7 @@ use SpiffyAuthorize\AuthorizeEvent;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\Permissions;
 
-class Rbac implements AuthorizeInterface
+class RbacService implements AuthorizeInterface
 {
     use EventManagerAwareTrait;
 
@@ -128,7 +128,7 @@ class Rbac implements AuthorizeInterface
      * @param string $permission
      * @param string|\Closure\\SpiffyAuthorize\Assertion\AssertionInterface $assertion
      * @throws \SpiffyAuthorize\Assertion\Exception\InvalidArgumentException on invalid assertion type
-     * @return Rbac
+     * @return RbacService
      */
     public function registerAssertion($permission, $assertion)
     {
@@ -140,7 +140,7 @@ class Rbac implements AuthorizeInterface
     }
 
     /**
-     * @return Rbac
+     * @return RbacService
      */
     public function clearAssertions()
     {
@@ -150,7 +150,7 @@ class Rbac implements AuthorizeInterface
 
     /**
      * @param array $assertions
-     * @return Rbac
+     * @return RbacService
      */
     public function setAssertions($assertions)
     {
@@ -190,7 +190,7 @@ class Rbac implements AuthorizeInterface
 
     /**
      * @param \SpiffyAuthorize\Provider\Identity\ProviderInterface $identityProvider
-     * @return Rbac
+     * @return RbacService
      */
     public function setIdentityProvider($identityProvider)
     {
@@ -209,7 +209,7 @@ class Rbac implements AuthorizeInterface
     /**
      * Setting a new provider requires a reset of rbac roles/permissions.
      *
-     * @return Rbac
+     * @return RbacService
      */
     protected function reset()
     {

@@ -2,17 +2,17 @@
 
 namespace SpiffyAuthorizeTest\Service;
 
-use SpiffyAuthorize\Provider\Identity\ZendAuthentication;
-use SpiffyAuthorize\Service;
+use SpiffyAuthorize\Provider\Identity\AuthenticationProvider;
+use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset\SimpleAssertion;
 use SpiffyAuthorizeTest\Asset\Identity;
 use SpiffyAuthorizeTest\Asset\RbacRoleProvider;
 use Zend\Authentication\AuthenticationService;
 
-class AuthorizeTest extends \PHPUnit_Framework_TestCase
+class RbacServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ZendAuthentication
+     * @var AuthenticationProvider
      */
     protected $identityProvider;
 
@@ -21,12 +21,12 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
         $authService  = new AuthenticationService();
         $authService->getStorage()->write(new Identity());
 
-        $this->identityProvider = new ZendAuthentication($authService);
+        $this->identityProvider = new AuthenticationProvider($authService);
     }
 
     public function testLoadingRolesFromInitProvider()
     {
-        $rbac     = new Service\Rbac();
+        $rbac     = new RbacService();
         $provider = new RbacRoleProvider();
         $rbac->getEventManager()->attach($provider);
 
@@ -36,7 +36,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
 
     public function testIsAuthorized()
     {
-        $rbac     = new Service\Rbac();
+        $rbac     = new RbacService();
         $provider = new RbacRoleProvider();
         $rbac->getEventManager()->attach($provider);
         $this->assertFalse($rbac->isAuthorized('foo'));
@@ -51,7 +51,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
 
     public function testIsAuthorizedAssertions()
     {
-        $rbac     = new Service\Rbac();
+        $rbac     = new RbacService();
         $provider = new RbacRoleProvider();
         $rbac->getEventManager()->attach($provider);
         $rbac->setIdentityProvider($this->identityProvider);
@@ -63,7 +63,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
 
     public function testHasRole()
     {
-        $rbac = new Service\Rbac();
+        $rbac = new RbacService();
         $rbac->getEventManager()->attach(new RbacRoleProvider());
         $this->assertFalse($rbac->hasRole('role1'));
         $this->assertFalse($rbac->hasRole('role2'));
@@ -81,7 +81,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
 
     public function testHasResource()
     {
-        $rbac = new Service\Rbac();
+        $rbac = new RbacService();
         $rbac->getEventManager()->attach(new RbacRoleProvider());
         $this->assertFalse($rbac->hasResource('role1'));
 
@@ -94,7 +94,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterAssertion()
     {
-        $rbac = new Service\Rbac();
+        $rbac = new RbacService();
         $rbac->registerAssertion('foo.bar', function() {});
         $this->assertEquals(['foo.bar' => function() {}], $rbac->getAssertions());
 
@@ -113,7 +113,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
             'bar' => new SimpleAssertion()
         ];
 
-        $rbac = new Service\Rbac();
+        $rbac = new RbacService();
         $rbac->setAssertions($assertions);
 
         $this->assertCount(2, $rbac->getAssertions());
@@ -129,7 +129,7 @@ class AuthorizeTest extends \PHPUnit_Framework_TestCase
             'bar' => new SimpleAssertion()
         ];
 
-        $rbac = new Service\Rbac();
+        $rbac = new RbacService();
         $rbac->setAssertions($assertions);
         $this->assertCount(2, $rbac->getAssertions());
 

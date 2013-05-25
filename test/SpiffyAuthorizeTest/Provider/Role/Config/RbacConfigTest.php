@@ -2,14 +2,14 @@
 
 namespace SpiffyAuthorizeTest\Provider\Role\Config;
 
-use SpiffyAuthorize\Provider\Role\Config\RbacConfig;
-use SpiffyAuthorize\Service\Rbac;
+use SpiffyAuthorize\Provider\Role\Config\RbacProvider;
+use SpiffyAuthorize\Service\RbacService;
 
 class RbacConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testParentsContainingChildren()
     {
-        $provider = new RbacConfig([
+        $provider = new RbacProvider([
             'parent1' => [
                 'child1',
                 'child2' => [
@@ -22,7 +22,7 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
             'parent2'
         ]);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($provider);
 
         $rbac = $service->getContainer();
@@ -38,13 +38,13 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testParentsOnly()
     {
-        $provider = new RbacConfig([
+        $provider = new RbacProvider([
             'parent1' => [],
             'parent2',
             'parent2'
         ]);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($provider);
 
         $rbac = $service->getContainer();
@@ -55,9 +55,9 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyConfig()
     {
-        $provider = new RbacConfig([]);
+        $provider = new RbacProvider([]);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach($provider);
 
         $this->assertFalse($service->getContainer()->hasChildren());

@@ -1,21 +1,21 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Provider\Permission;
+namespace SpiffyAuthorizeTest\Provider\Permission\Config;
 
-use SpiffyAuthorize\Provider\Permission\Config;
-use SpiffyAuthorize\Service\Rbac;
+use SpiffyAuthorize\Provider\Permission\Config\RbacProvider;
+use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset\RbacRoleProvider;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class RbacProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testConfig()
     {
-        $config = new Config([
+        $config = new RbacProvider([
             'foo' => 'role1',
             'bar' => ['child1', 'subchild2']
         ]);
 
-        $service = new Rbac();
+        $service = new RbacService();
         $service->getEventManager()->attach(new RbacRoleProvider());
         $service->getEventManager()->attach($config);
 

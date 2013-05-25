@@ -5,7 +5,7 @@ namespace SpiffyAuthorize\Provider\Role\Config;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Provider\Role\RbacProviderTrait;
 
-class RbacConfig extends AbstractConfig
+class RbacProvider extends AbstractProvider
 {
     use RbacProviderTrait;
 

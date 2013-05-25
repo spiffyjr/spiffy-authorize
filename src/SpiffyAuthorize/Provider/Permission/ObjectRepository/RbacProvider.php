@@ -1,18 +1,19 @@
 <?php
 
-namespace SpiffyAuthorize\Provider\Permission;
+namespace SpiffyAuthorize\Provider\Permission\ObjectRepository;
 
 use Doctrine\Common\Persistence;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
-use SpiffyAuthorize\Provider\Role\ExtractorTrait;
+use SpiffyAuthorize\Provider\Permission;
+use SpiffyAuthorize\Provider\Role;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 
-class ObjectRepository implements ProviderInterface
+class RbacProvider implements Permission\ProviderInterface
 {
-    use ExtractorTrait;
     use ListenerAggregateTrait;
+    use Role\ExtractorTrait;
 
     /**
      * @var Persistence\ObjectRepository
@@ -44,7 +45,7 @@ class ObjectRepository implements ProviderInterface
 
     /**
      * @param AuthorizeEvent $e
-     * @throws Exception\InvalidArgumentException if permissions are an array with invalid format
+     * @throws Permission\Exception\InvalidArgumentException if permissions are an array with invalid format
      */
     public function load(AuthorizeEvent $e)
     {
@@ -64,7 +65,7 @@ class ObjectRepository implements ProviderInterface
                 $roles      = current($entity);
 
                 if (is_numeric($permission)) {
-                    throw new Exception\InvalidArgumentException(
+                    throw new Permission\Exception\InvalidArgumentException(
                         'roles provided with no permission name'
                     );
                 }
@@ -73,7 +74,7 @@ class ObjectRepository implements ProviderInterface
                     $roles = [ $roles ];
                 }
             } else {
-                throw new Exception\InvalidArgumentException('unknown permission entity type');
+                throw new Permission\Exception\InvalidArgumentException('unknown permission entity type');
             }
 
             foreach ($roles as $role) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorize\Provider\Permission;
+namespace SpiffyAuthorize\Provider\Permission\Config;
 
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
@@ -18,7 +18,7 @@ use Zend\EventManager\ListenerAggregateTrait;
  *
  * A numeric index will be treated as a role with no children.
  */
-class Config implements ProviderInterface
+class RbacProvider implements ProviderInterface
 {
     use ListenerAggregateTrait;
 

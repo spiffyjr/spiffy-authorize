@@ -7,7 +7,7 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
 
-class ZendAuthentication implements ProviderInterface
+class AuthenticationProvider implements ProviderInterface
 {
     use ProviderTrait;
 
