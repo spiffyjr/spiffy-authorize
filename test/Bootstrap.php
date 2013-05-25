@@ -5,8 +5,13 @@ $dir  = getcwd();
 $prev = '.';
 while (!is_dir($dir . '/vendor')) {
     $dir = dirname($dir);
-    if ($prev === $dir) return false;
+    if ($prev === $dir) {
+        $dir = false;
+        break;
+    }
     $prev = $dir;
 }
 
-require $dir . '/vendor/spiffy/spiffy-test/Bootstrap.php';
+if ($dir) {
+    require $dir . '/vendor/autoload.php';
+}
