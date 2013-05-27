@@ -16,12 +16,12 @@ interface ProviderInterface
      *
      * @return string
      */
-    public function getDefaultUnauthorizedRole();
+    public function getDefaultGuestRole();
 
     /**
      * Get the default role for an identity with no roles available or set.
      *
      * @return string
      */
-    public function getDefaultAuthorizedRole();
+    public function getDefaultRole();
 }

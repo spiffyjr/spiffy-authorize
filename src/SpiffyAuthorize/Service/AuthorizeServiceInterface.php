@@ -2,7 +2,7 @@
 
 namespace SpiffyAuthorize\Service;
 
-interface AuthorizeInterface
+interface AuthorizeServiceInterface
 {
     /**
      * Return the container that is used for authorization.
@@ -43,7 +43,7 @@ interface AuthorizeInterface
      * @param string $resource
      * @param string|\Closure\\SpiffyAuthorize\Assertion\AssertionInterface $assertion
      * @throws \SpiffyAuthorize\Assertion\Exception\InvalidArgumentException on invalid assertion type
-     * @return AuthorizeInterface
+     * @return AuthorizeServiceInterface
      */
     public function registerAssertion($resource, $assertion);
 }

@@ -7,46 +7,46 @@ trait ProviderTrait
     /**
      * @var string
      */
-    protected $defaultUnauthorizedRole = 'guest';
+    protected $defaultGuestRole = 'guest';
 
     /**
      * @var string
      */
-    protected $defaultAuthorizedRole = 'member';
+    protected $defaultRole = 'member';
 
     /**
-     * @param string $defaultAuthorizedRole
+     * @param string $defaultRole
      * @return ProviderTrait
      */
-    public function setDefaultAuthorizedRole($defaultAuthorizedRole)
+    public function setDefaultRole($defaultRole)
     {
-        $this->defaultAuthorizedRole = $defaultAuthorizedRole;
+        $this->defaultRole = $defaultRole;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDefaultAuthorizedRole()
+    public function getDefaultRole()
     {
-        return $this->defaultAuthorizedRole;
+        return $this->defaultRole;
     }
 
     /**
-     * @param string $defaultUnauthorizedRole
+     * @param string $defaultGuestRole
      * @return ProviderTrait
      */
-    public function setDefaultUnauthorizedRole($defaultUnauthorizedRole)
+    public function setDefaultGuestRole($defaultGuestRole)
     {
-        $this->defaultUnauthorizedRole = $defaultUnauthorizedRole;
+        $this->defaultGuestRole = $defaultGuestRole;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDefaultUnauthorizedRole()
+    public function getDefaultGuestRole()
     {
-        return $this->defaultUnauthorizedRole;
+        return $this->defaultGuestRole;
     }
 }

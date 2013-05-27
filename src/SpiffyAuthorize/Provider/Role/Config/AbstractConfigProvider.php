@@ -3,6 +3,7 @@
 namespace SpiffyAuthorize\Provider\Role\Config;
 
 use SpiffyAuthorize\AuthorizeEvent;
+use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -20,21 +21,31 @@ use Zend\EventManager\ListenerAggregateTrait;
  *
  * A numeric index will be treated as a role with no children.
  */
-abstract class AbstractProvider implements ProviderInterface
+abstract class AbstractConfigProvider extends AbstractProvider implements ProviderInterface
 {
     use ListenerAggregateTrait;
 
     /**
      * @var array
      */
-    protected $config = [];
+    protected $rules = [];
 
     /**
-     * @param array $config
+     * @param array $rules
+     * @return AbstractConfigProvider
      */
-    public function __construct(array $config)
+    public function setRules(array $rules)
     {
-        $this->config = $config;
+        $this->rules = $rules;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRules()
+    {
+        return $this->rules;
     }
 
     /**
@@ -49,7 +60,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
     }
 
     /**

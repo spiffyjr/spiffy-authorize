@@ -24,8 +24,9 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new RbacProvider($or);
-        $roles       = new Asset\RbacRoleProvider();
+        $permissions = new RbacProvider();
+        $permissions->setObjectRepository($or);
+        $roles = new Asset\RbacRoleProvider();
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);
@@ -48,8 +49,9 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new RbacProvider($or);
-        $roles       = new Asset\RbacRoleProvider();
+        $permissions = new RbacProvider();
+        $permissions->setObjectRepository($or);
+        $roles = new Asset\RbacRoleProvider();
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);
@@ -70,7 +72,8 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new RbacProvider($or);
+        $permissions = new RbacProvider();
+        $permissions->setObjectRepository($or);
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);
@@ -92,7 +95,8 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $permissions = new RbacProvider($or);
+        $permissions = new RbacProvider();
+        $permissions->setObjectRepository($or);
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);

@@ -9,7 +9,8 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testParentsContainingChildren()
     {
-        $provider = new RbacProvider([
+        $provider = new RbacProvider();
+        $provider->setRules([
             'parent1' => [
                 'child1',
                 'child2' => [
@@ -38,7 +39,8 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testParentsOnly()
     {
-        $provider = new RbacProvider([
+        $provider = new RbacProvider();
+        $provider->setRules([
             'parent1' => [],
             'parent2',
             'parent2'
@@ -55,9 +57,8 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyConfig()
     {
-        $provider = new RbacProvider([]);
-
-        $service = new RbacService();
+        $provider = new RbacProvider();
+        $service  = new RbacService();
         $service->getEventManager()->attach($provider);
 
         $this->assertFalse($service->getContainer()->hasChildren());

@@ -12,6 +12,4 @@ while (!is_dir($dir . '/vendor')) {
     $prev = $dir;
 }
 
-if ($dir) {
-    require $dir . '/vendor/autoload.php';
-}
+require $dir . '/vendor/spiffy/spiffy-test/Bootstrap.php';

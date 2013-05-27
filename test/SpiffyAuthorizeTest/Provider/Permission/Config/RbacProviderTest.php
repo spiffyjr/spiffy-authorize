@@ -10,7 +10,8 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testConfig()
     {
-        $config = new RbacProvider([
+        $config = new RbacProvider();
+        $config->setRules([
             'foo' => 'role1',
             'bar' => ['child1', 'subchild2']
         ]);

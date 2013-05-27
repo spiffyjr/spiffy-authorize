@@ -9,7 +9,7 @@ use SpiffyAuthorize\AuthorizeEvent;
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\Permissions;
 
-class RbacService implements AuthorizeInterface
+class RbacService implements AuthorizeServiceInterface
 {
     use EventManagerAwareTrait;
 

@@ -21,7 +21,8 @@ class RbacServiceTest extends \PHPUnit_Framework_TestCase
         $authService  = new AuthenticationService();
         $authService->getStorage()->write(new Identity());
 
-        $this->identityProvider = new AuthenticationProvider($authService);
+        $this->identityProvider = new AuthenticationProvider();
+        $this->identityProvider->setAuthService($authService);
     }
 
     public function testLoadingRolesFromInitProvider()

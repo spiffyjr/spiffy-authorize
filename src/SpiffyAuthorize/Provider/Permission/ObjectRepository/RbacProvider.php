@@ -2,30 +2,41 @@
 
 namespace SpiffyAuthorize\Provider\Permission\ObjectRepository;
 
-use Doctrine\Common\Persistence;
+use Doctrine\Common\Persistence\ObjectRepository;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
+use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Permission;
 use SpiffyAuthorize\Provider\Role;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 
-class RbacProvider implements Permission\ProviderInterface
+class RbacProvider extends AbstractProvider implements Permission\ProviderInterface
 {
     use ListenerAggregateTrait;
     use Role\ExtractorTrait;
 
     /**
-     * @var Persistence\ObjectRepository
+     * @var ObjectRepository
      */
     protected $objectRepository;
 
     /**
-     * @param Persistence\ObjectRepository $objectRepository
+     * @param ObjectRepository $objectRepository
+     * @return RbacProvider
      */
-    public function __construct(Persistence\ObjectRepository $objectRepository)
+    public function setObjectRepository(ObjectRepository $objectRepository)
     {
         $this->objectRepository = $objectRepository;
+        return $this;
+    }
+
+    /**
+     * @return ObjectRepository
+     */
+    public function getObjectRepository()
+    {
+        return $this->objectRepository;
     }
 
     /**
@@ -40,7 +51,7 @@ class RbacProvider implements Permission\ProviderInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
     }
 
     /**
@@ -51,7 +62,7 @@ class RbacProvider implements Permission\ProviderInterface
     {
         /** @var \Zend\Permissions\Rbac\Rbac $rbac */
         $rbac   = $e->getTarget();
-        $result = $this->objectRepository->findAll();
+        $result = $this->getObjectRepository()->findAll();
 
         foreach ($result as $entity) {
             $permission = null;

@@ -13,22 +13,23 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testNoIdentityReturnsDefaultUnauthorizedRole()
     {
-        $service  = new AuthenticationService();
-        $provider = new AuthenticationProvider($service);
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService(new AuthenticationService());
 
-        $this->assertEquals([$provider->getDefaultUnauthorizedRole()], $provider->getIdentityRoles());
+        $this->assertEquals([$provider->getDefaultGuestRole()], $provider->getIdentityRoles());
     }
 
     public function testIdentityWithNoRolesReturnsDefaultAuthorizedRole()
     {
         $service  = new AuthenticationService();
-        $provider = new AuthenticationProvider($service);
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService($service);
 
         $service->getStorage()->write([]);
-        $this->assertEquals([$provider->getDefaultAuthorizedRole()], $provider->getIdentityRoles());
+        $this->assertEquals([$provider->getDefaultRole()], $provider->getIdentityRoles());
 
         $service->getStorage()->write(new EmptyIdentity());
-        $this->assertEquals([$provider->getDefaultAuthorizedRole()], $provider->getIdentityRoles());
+        $this->assertEquals([$provider->getDefaultRole()], $provider->getIdentityRoles());
     }
 
     public function testRbacRolesConvertedToString()
@@ -36,8 +37,9 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $service  = new AuthenticationService();
         $service->getStorage()->write(new IdentityRbacRole());
 
-        $provider = new AuthenticationProvider($service);
-        $result   = $provider->getIdentityRoles();
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService($service);
+        $result = $provider->getIdentityRoles();
 
         $this->assertEquals(['foo','bar'], $result);
     }
@@ -47,8 +49,9 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $service  = new AuthenticationService();
         $service->getStorage()->write(new IdentityAclRole());
 
-        $provider = new AuthenticationProvider($service);
-        $result   = $provider->getIdentityRoles();
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService($service);
+        $result = $provider->getIdentityRoles();
 
         $this->assertEquals(['foo','bar'], $result);
     }
@@ -58,7 +61,8 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $service  = new AuthenticationService();
         $service->getStorage()->write(new IdentityObjectRole());
 
-        $provider = new AuthenticationProvider($service);
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService($service);
         $result   = $provider->getIdentityRoles();
 
         $this->assertEquals(['foo','bar'], $result);

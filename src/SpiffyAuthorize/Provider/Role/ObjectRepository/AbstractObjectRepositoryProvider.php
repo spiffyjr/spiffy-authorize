@@ -4,12 +4,13 @@ namespace SpiffyAuthorize\Provider\Role\ObjectRepository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use SpiffyAuthorize\AuthorizeEvent;
+use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Role\ExtractorTrait;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 
-abstract class AbstractObjectRepository implements ProviderInterface
+abstract class AbstractObjectRepositoryProvider extends AbstractProvider implements ProviderInterface
 {
     use ExtractorTrait;
     use ListenerAggregateTrait;
@@ -21,10 +22,20 @@ abstract class AbstractObjectRepository implements ProviderInterface
 
     /**
      * @param ObjectRepository $objectRepository
+     * @return AbstractObjectRepositoryProvider
      */
-    public function __construct(ObjectRepository $objectRepository)
+    public function setObjectRepository(ObjectRepository $objectRepository)
     {
         $this->objectRepository = $objectRepository;
+        return $this;
+    }
+
+    /**
+     * @return ObjectRepository
+     */
+    public function getObjectRepository()
+    {
+        return $this->objectRepository;
     }
 
     /**
@@ -39,7 +50,7 @@ abstract class AbstractObjectRepository implements ProviderInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
     }
 
     /**
@@ -47,7 +58,7 @@ abstract class AbstractObjectRepository implements ProviderInterface
      */
     public function load(AuthorizeEvent $e)
     {
-        $result = $this->objectRepository->findAll();
+        $result = $this->getObjectRepository()->findAll();
         $roles  = [];
 
         foreach ($result as $entity) {
