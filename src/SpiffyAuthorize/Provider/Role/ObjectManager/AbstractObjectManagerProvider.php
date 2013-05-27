@@ -104,5 +104,5 @@ abstract class AbstractObjectManagerProvider extends AbstractProvider implements
      * @param string|null $parentName
      * @return void
      */
-    abstract public function loadRoles($container, $roles, $parentName = null);
+    abstract protected function loadRoles($container, $roles, $parentName = null);
 }
