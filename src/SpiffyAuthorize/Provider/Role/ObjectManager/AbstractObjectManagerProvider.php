@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyAuthorize\Provider\Role\ObjectRepository;
+namespace SpiffyAuthorize\Provider\Role\ObjectManager;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Role\ExtractorTrait;
@@ -10,32 +10,55 @@ use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 
-abstract class AbstractObjectRepositoryProvider extends AbstractProvider implements ProviderInterface
+abstract class AbstractObjectManagerProvider extends AbstractProvider implements ProviderInterface
 {
     use ExtractorTrait;
     use ListenerAggregateTrait;
 
     /**
-     * @var ObjectRepository
+     * @var ObjectManager
      */
-    protected $objectRepository;
+    protected $objectManager;
 
     /**
-     * @param ObjectRepository $objectRepository
-     * @return AbstractObjectRepositoryProvider
+     * @var string
      */
-    public function setObjectRepository(ObjectRepository $objectRepository)
+    protected $targetClass;
+
+    /**
+     * @param ObjectManager $objectManager
+     * @return AbstractObjectManagerProvider
+     */
+    public function setObjectManager(ObjectManager $objectManager)
     {
-        $this->objectRepository = $objectRepository;
+        $this->objectManager = $objectManager;
         return $this;
     }
 
     /**
-     * @return ObjectRepository
+     * @return ObjectManager
      */
-    public function getObjectRepository()
+    public function getObjectManager()
     {
-        return $this->objectRepository;
+        return $this->objectManager;
+    }
+
+    /**
+     * @param string $targetClass
+     * @return AbstractObjectManagerProvider
+     */
+    public function setTargetClass($targetClass)
+    {
+        $this->targetClass = $targetClass;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTargetClass()
+    {
+        return $this->targetClass;
     }
 
     /**
@@ -58,7 +81,7 @@ abstract class AbstractObjectRepositoryProvider extends AbstractProvider impleme
      */
     public function load(AuthorizeEvent $e)
     {
-        $result = $this->getObjectRepository()->findAll();
+        $result = $this->getObjectManager()->getRepository($this->getTargetClass())->findAll();
         $roles  = [];
 
         foreach ($result as $entity) {

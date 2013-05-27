@@ -11,7 +11,7 @@ class OptionsModuleFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $serviceManager = new ServiceManager();
         $serviceManager->setService('Configuration', [
-            'spiffy-authorize' => [
+            'spiffy_authorize' => [
                 'default_role' => 'foo'
             ]
         ]);

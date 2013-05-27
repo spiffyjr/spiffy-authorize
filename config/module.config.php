@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'spiffy-authorize' => [
+    'spiffy_authorize' => [
         // The service locator name used to get the authorize service.
         'authorize_service' => 'SpiffyAuthorize\Service\RbacService',
 

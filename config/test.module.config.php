@@ -6,7 +6,7 @@ return [
             'Zend\Authentication\AuthenticationService' => 'Zend\Authentication\AuthenticationService'
         ]
     ],
-    'spiffy-authorize' => [
+    'spiffy_authorize' => [
         'permission_providers' => [
             [
                 'name'    => 'SpiffyAuthorize\Provider\Permission\Config\RbacProvider',

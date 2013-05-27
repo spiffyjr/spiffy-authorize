@@ -11,7 +11,7 @@ option that defines the routes and resources that apply to each route. A sample 
 
 ```php
 return [
-    'spiffy-authorize' => [
+    'spiffy_authorize' => [
         'guards' => [
             [
                 'name' => 'SpiffyAuthorize\Guard\RouteGuard',

@@ -11,7 +11,7 @@ would look like:
 
 ```php
 return [
-    'spiffy-authorize' => [
+    'spiffy_authorize' => [
         'permission_providers' => [
             [
                 'name' => 'SpiffyAuthorize\Provider\Permission\Config\RbacProvider',
@@ -26,23 +26,23 @@ return [
 ];
 ```
 
-## ObjectRepository\RbacProvider
+## ObjectManager\RbacProvider
 
-The ObjectRepository\RbacProvider takes an object repository and prepares the Rbac container from it. A sample
+The ObjectManager\RbacProvider takes an object manager and prepares the Rbac container from it. A sample
 configuration would look like:
 
 ```php
 return [
-    'spiffy-authorize' => [
+    'spiffy_authorize' => [
         'permission_providers' => [
             [
-                'name' => 'SpiffyAuthorize\Provider\Permission\ObjectRepository\RbacProvider'
+                'name' => 'SpiffyAuthorize\Provider\Permission\ObjectManager\RbacProvider',
+                'options' => [
+                    'object_manager' => 'Doctrine\ORM\EntityManager', // service manager name of object manager instance
+                    'target_class' => 'SpiffyCms\Entity\Permission', // permission entity class
+                ]
             ]
         ]
     ]
 ];
 ```
-
-The configuration above will use the `SpiffyAuthorize\Service\ProviderPermissionRbacObjectRepositoryFactory` to create
-the service using the default object repository `Doctrine\ORM\EntityManager`. If your object repository differs you will
-need to overwrite the default factory with your own implementation.

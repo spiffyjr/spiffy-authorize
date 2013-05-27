@@ -1,9 +1,9 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Provider\Permission\ObjectRepository;
+namespace SpiffyAuthorizeTest\Provider\Permission\ObjectManager;
 
 use Mockery as m;
-use SpiffyAuthorize\Provider\Permission\ObjectRepository\RbacProvider;
+use SpiffyAuthorize\Provider\Permission\ObjectManager\RbacProvider;
 use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset;
 
@@ -14,6 +14,38 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         m::close();
     }
 
+    public function testExceptionThrownWhenMissingObjectManager()
+    {
+        $permissions = new RbacProvider();
+
+        $this->setExpectedException(
+            'SpiffyAuthorize\Provider\Permission\Exception\RuntimeException',
+            'No object_manager was set.'
+        );
+
+        $service = new RbacService();
+        $service->getEventManager()->attach($permissions);
+        $service->getContainer();
+    }
+
+    public function testExceptionThrownWhenMissingTargetClass()
+    {
+        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om->shouldReceive('getRepository')->andReturn(m::mock('Doctrine\ORM\EntityRepository'));
+
+        $permissions = new RbacProvider();
+        $permissions->setObjectManager($om);
+
+        $this->setExpectedException(
+            'SpiffyAuthorize\Provider\Permission\Exception\RuntimeException',
+            'No target_class was set.'
+        );
+
+        $service = new RbacService();
+        $service->getEventManager()->attach($permissions);
+        $service->getContainer();
+    }
+
     public function testPermissionInterfacePermissions()
     {
         $result = [
@@ -21,11 +53,15 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
             new Asset\Permission('bar', ['child2'])
         ];
 
-        $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
+        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om->shouldReceive('getRepository')->andReturn($or);
+
         $permissions = new RbacProvider();
-        $permissions->setObjectRepository($or);
+        $permissions->setObjectManager($om);
+        $permissions->setTargetClass('Entity');
         $roles = new Asset\RbacRoleProvider();
 
         $service = new RbacService();
@@ -46,11 +82,15 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
             [ 'baz' => 'child2' ]
         ];
 
-        $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
+        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om->shouldReceive('getRepository')->andReturn($or);
+
         $permissions = new RbacProvider();
-        $permissions->setObjectRepository($or);
+        $permissions->setObjectManager($om);
+        $permissions->setTargetClass('Entity');
         $roles = new Asset\RbacRoleProvider();
 
         $service = new RbacService();
@@ -69,11 +109,15 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $result = ['foo'];
         $roles  = new Asset\RbacRoleProvider();
 
-        $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
+        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om->shouldReceive('getRepository')->andReturn($or);
+
         $permissions = new RbacProvider();
-        $permissions->setObjectRepository($or);
+        $permissions->setObjectManager($om);
+        $permissions->setTargetClass('Entity');
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);
@@ -92,11 +136,15 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $result = [ [ 'foo' ] ];
         $roles  = new Asset\RbacRoleProvider();
 
-        $or = m::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
 
+        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om->shouldReceive('getRepository')->andReturn($or);
+
         $permissions = new RbacProvider();
-        $permissions->setObjectRepository($or);
+        $permissions->setObjectManager($om);
+        $permissions->setTargetClass('Entity');
 
         $service = new RbacService();
         $service->getEventManager()->attach($roles);

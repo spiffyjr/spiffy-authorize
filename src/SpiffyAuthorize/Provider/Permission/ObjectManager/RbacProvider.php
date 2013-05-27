@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyAuthorize\Provider\Permission\ObjectRepository;
+namespace SpiffyAuthorize\Provider\Permission\ObjectManager;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
 use SpiffyAuthorize\Provider\AbstractProvider;
@@ -17,26 +17,49 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
     use Role\ExtractorTrait;
 
     /**
-     * @var ObjectRepository
+     * @var ObjectManager
      */
-    protected $objectRepository;
+    protected $objectManager;
 
     /**
-     * @param ObjectRepository $objectRepository
+     * @var string
+     */
+    protected $targetClass;
+
+    /**
+     * @param ObjectManager $ObjectManager
      * @return RbacProvider
      */
-    public function setObjectRepository(ObjectRepository $objectRepository)
+    public function setObjectManager(ObjectManager $ObjectManager)
     {
-        $this->objectRepository = $objectRepository;
+        $this->objectManager = $ObjectManager;
         return $this;
     }
 
     /**
-     * @return ObjectRepository
+     * @return ObjectManager
      */
-    public function getObjectRepository()
+    public function getObjectManager()
     {
-        return $this->objectRepository;
+        return $this->objectManager;
+    }
+
+    /**
+     * @param string $targetClass
+     * @return RbacProvider
+     */
+    public function setTargetClass($targetClass)
+    {
+        $this->targetClass = $targetClass;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTargetClass()
+    {
+        return $this->targetClass;
     }
 
     /**
@@ -57,12 +80,22 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
     /**
      * @param AuthorizeEvent $e
      * @throws Permission\Exception\InvalidArgumentException if permissions are an array with invalid format
+     * @throws Permission\Exception\RuntimeException if no object manager was set
+     * @throws Permission\Exception\RuntimeException if no target class was set
      */
     public function load(AuthorizeEvent $e)
     {
+        if (!$this->getObjectManager()) {
+            throw new Permission\Exception\RuntimeException('No object_manager was set.');
+        }
+
+        if (!$this->getTargetClass()) {
+            throw new Permission\Exception\RuntimeException('No target_class was set.');
+        }
+
         /** @var \Zend\Permissions\Rbac\Rbac $rbac */
         $rbac   = $e->getTarget();
-        $result = $this->getObjectRepository()->findAll();
+        $result = $this->getObjectManager()->getRepository($this->getTargetClass())->findAll();
 
         foreach ($result as $entity) {
             $permission = null;

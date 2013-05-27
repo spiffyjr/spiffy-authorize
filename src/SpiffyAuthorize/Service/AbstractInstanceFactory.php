@@ -22,7 +22,13 @@ abstract class AbstractInstanceFactory implements FactoryInterface
 
         foreach ($this->getInstances($options) as $config) {
             $instance = $this->get($serviceLocator, $config['name']);
-            $instance->setFromArray(isset($config['options']) ? $config['options'] : []);
+            $options  = isset($config['options']) ? $config['options'] : [];
+
+            foreach ($options as &$value) {
+                $value = $this->get($serviceLocator, $value, false);
+            }
+
+            $instance->setFromArray($options);
 
             $instances[] = $instance;
         }
@@ -32,15 +38,19 @@ abstract class AbstractInstanceFactory implements FactoryInterface
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
-     * @param $name
+     * @param string $name
+     * @param bool $create
      * @return object
      */
-    protected function get(ServiceLocatorInterface $serviceLocator, $name)
+    protected function get(ServiceLocatorInterface $serviceLocator, $name, $create = true)
     {
         if (is_string($name) && $serviceLocator->has($name)) {
             return $serviceLocator->get($name);
         }
-        return new $name;
+        if ($create) {
+            return new $name;
+        }
+        return $name;
     }
 
     /**
