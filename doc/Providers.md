@@ -1,1 +1,0 @@
-# SpiffyAuthorize Providers
