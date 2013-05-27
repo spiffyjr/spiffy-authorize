@@ -6,7 +6,7 @@ use SpiffyAuthorize\Options\ModuleOptions;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class OptionsModuleOptionsFactory implements FactoryInterface
+class OptionsModuleFactory implements FactoryInterface
 {
     /**
      * Create service

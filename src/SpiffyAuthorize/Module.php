@@ -27,6 +27,8 @@ class Module implements
         foreach ($sm->get('SpiffyAuthorize\Guards') as $guard) {
             $app->getEventManager()->attach($guard);
         }
+
+        $app->getEventManager()->attach($sm->get('SpiffyAuthorize\ViewStrategy'));
     }
 
     /**

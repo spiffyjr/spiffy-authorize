@@ -33,6 +33,12 @@ return [
         'view_strategy' => 'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy',
 
         // The template to use for displaying unauthorized errors'
-        'view_template' => 'error/403'
+        'view_template' => 'error/403',
+    ],
+
+    'view_manager' => [
+        'template_map' => [
+            'error/403' => __DIR__ . '/../view/error/403.phtml'
+        ]
     ]
 ];

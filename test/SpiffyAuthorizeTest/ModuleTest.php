@@ -12,7 +12,7 @@ use Zend\ServiceManager\ServiceManager;
 
 class ModuleTest extends TestCase
 {
-    public function testGuardsAreRegistered()
+    public function testGuards()
     {
         $em = new EventManager();
         $sm = $this->getServiceManager();
@@ -30,5 +30,10 @@ class ModuleTest extends TestCase
         $module->onBootstrap($mvcEvent);
 
         $this->assertCount(2, $em->getListeners(MvcEvent::EVENT_ROUTE));
+    }
+
+    public function testStrategy()
+    {
+
     }
 }
