@@ -38,9 +38,25 @@ return [
         'view_template' => 'error/403',
     ],
 
+    'zenddevelopertools' => [
+        'collectors' => [
+            'spiffy_authorize_permission_collector' => 'SpiffyAuthorize\Collector\PermissionCollector',
+            'spiffy_authorize_role_collector'       => 'SpiffyAuthorize\Collector\RoleCollector',
+        ],
+
+        'toolbar' => [
+            'entries' => [
+                'spiffy_authorize_permission_collector' => 'zend-developer-tools/toolbar/spiffy-authorize-permission',
+                'spiffy_authorize_role_collector'       => 'zend-developer-tools/toolbar/spiffy-authorize-role',
+            ]
+        ]
+    ],
+
     'view_manager' => [
         'template_map' => [
-            'error/403' => __DIR__ . '/../view/error/403.phtml'
+            'error/403'                                                => __DIR__ . '/../view/error/403.phtml',
+            'zend-developer-tools/toolbar/spiffy-authorize-permission' => __DIR__ . '/../view/zend-developer-tools/toolbar/spiffy-authorize-permission.phtml',
+            'zend-developer-tools/toolbar/spiffy-authorize-role'       => __DIR__ . '/../view/zend-developer-tools/toolbar/spiffy-authorize-role.phtml',
         ]
     ]
 ];

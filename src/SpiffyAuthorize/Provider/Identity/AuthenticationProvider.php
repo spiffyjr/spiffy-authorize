@@ -18,7 +18,7 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
     protected $authService;
 
     /**
-     * @param \Zend\Authentication\AuthenticationService $authService
+     * @param AuthenticationService $authService
      * @return AuthenticationProvider
      */
     public function setAuthService(AuthenticationService $authService)
@@ -28,10 +28,13 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
     }
 
     /**
-     * @return \Zend\Authentication\AuthenticationService
+     * @return AuthenticationService
      */
     public function getAuthService()
     {
+        if (!$this->authService) {
+            $this->authService = new AuthenticationService();
+        }
         return $this->authService;
     }
 
@@ -42,11 +45,11 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
      */
     public function getIdentityRoles()
     {
-        if (!$this->authService->hasIdentity()) {
+        if (!$this->getAuthService()->hasIdentity()) {
             return [$this->getDefaultGuestRole()];
         }
 
-        $identity = $this->authService->getIdentity();
+        $identity = $this->getAuthService()->getIdentity();
         if ($identity instanceof IdentityInterface && 0 !== count($identity->getRoles())) {
             $roles = $identity->getRoles();
             foreach ($roles as $key => $role) {

@@ -58,7 +58,7 @@ class RbacProvider extends AbstractProvider implements ProviderInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load'], -100);
     }
 
     /**

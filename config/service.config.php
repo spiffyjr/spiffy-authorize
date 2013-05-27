@@ -9,11 +9,16 @@ return [
         'SpiffyAuthorize\ViewStrategy'        => 'SpiffyAuthorize\Service\ViewStrategyFactory',
 
         // Services that map directly to a class.
-        'SpiffyAuthorize\Guard\RouteGuard'                         => 'SpiffyAuthorize\Service\GuardRouteFactory',
-        'SpiffyAuthorize\Guard\RouteParamsGuard'                   => 'SpiffyAuthorize\Service\GuardRouteParamsFactory',
-        'SpiffyAuthorize\Provider\Identity\AuthenticationProvider' => 'SpiffyAuthorize\Service\ProviderIdentityFactory',
-        'SpiffyAuthorize\Service\RbacService'                      => 'SpiffyAuthorize\Service\RbacServiceFactory',
-        'SpiffyAuthorize\Options\ModuleOptions'                    => 'SpiffyAuthorize\Service\OptionsModuleFactory',
-        'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy'       => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
+        'SpiffyAuthorize\Collector\PermissionCollector'      => 'SpiffyAuthorize\Service\CollectorPermissionFactory',
+        'SpiffyAuthorize\Collector\RoleCollector'            => 'SpiffyAuthorize\Service\CollectorRoleFactory',
+        'SpiffyAuthorize\Guard\RouteGuard'                   => 'SpiffyAuthorize\Service\GuardRouteFactory',
+        'SpiffyAuthorize\Guard\RouteParamsGuard'             => 'SpiffyAuthorize\Service\GuardRouteParamsFactory',
+        'SpiffyAuthorize\Service\RbacService'                => 'SpiffyAuthorize\Service\RbacServiceFactory',
+        'SpiffyAuthorize\Options\ModuleOptions'              => 'SpiffyAuthorize\Service\OptionsModuleFactory',
+        'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy' => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
+    ],
+
+    'invokables' => [
+        'SpiffyAuthorize\Provider\Identity\AuthenticationProvider' => 'SpiffyAuthorize\Provider\Identity\AuthenticationProvider',
     ]
 ];

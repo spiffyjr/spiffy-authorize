@@ -19,11 +19,22 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([$provider->getDefaultGuestRole()], $provider->getIdentityRoles());
     }
 
+    public function testAuthServiceIsLazyLoaded()
+    {
+        $provider = new AuthenticationProvider();
+        $this->assertInstanceOf('Zend\Authentication\AuthenticationService', $provider->getAuthService());
+    }
+
+    public function testGetIdentityRolesUsesLazyLoaderAuthService()
+    {
+        $provider = new AuthenticationProvider();
+        $provider->getIdentityRoles();
+    }
+
     public function testIdentityWithNoRolesReturnsDefaultAuthorizedRole()
     {
         $service  = new AuthenticationService();
         $provider = new AuthenticationProvider();
-        $provider->setAuthService($service);
 
         $service->getStorage()->write([]);
         $this->assertEquals([$provider->getDefaultRole()], $provider->getIdentityRoles());
