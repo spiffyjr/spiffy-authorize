@@ -5,7 +5,7 @@ php:
 
 before_install:
  - curl -s https://getcomposer.org/installer | php
- - php composer.phar install --dev --no-interaction
+ - php composer.phar install --prefer-source --dev --no-interaction
  - cd test
 
 script:
