@@ -9,9 +9,11 @@ return [
         'SpiffyAuthorize\ViewStrategy'        => 'SpiffyAuthorize\Service\ViewStrategyFactory',
 
         // Services that map directly to a class.
-        'SpiffyAuthorize\Guard\RouteGuard'                   => 'SpiffyAuthorize\Service\GuardRouteFactory',
-        'SpiffyAuthorize\Service\RbacService'                => 'SpiffyAuthorize\Service\RbacServiceFactory',
-        'SpiffyAuthorize\Options\ModuleOptions'              => 'SpiffyAuthorize\Service\OptionsModuleFactory',
-        'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy' => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
+        'SpiffyAuthorize\Guard\RouteGuard'                         => 'SpiffyAuthorize\Service\GuardRouteFactory',
+        'SpiffyAuthorize\Guard\RouteParamsGuard'                   => 'SpiffyAuthorize\Service\GuardRouteParamsFactory',
+        'SpiffyAuthorize\Provider\Identity\AuthenticationProvider' => 'SpiffyAuthorize\Service\ProviderIdentityFactory',
+        'SpiffyAuthorize\Service\RbacService'                      => 'SpiffyAuthorize\Service\RbacServiceFactory',
+        'SpiffyAuthorize\Options\ModuleOptions'                    => 'SpiffyAuthorize\Service\OptionsModuleFactory',
+        'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy'       => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
     ]
 ];

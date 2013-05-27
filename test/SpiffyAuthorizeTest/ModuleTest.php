@@ -29,7 +29,8 @@ class ModuleTest extends TestCase
         $module = new Module();
         $module->onBootstrap($mvcEvent);
 
-        $this->assertCount(2, $em->getListeners(MvcEvent::EVENT_ROUTE));
+        // From module.config.php merged with test.module.config.php
+        $this->assertCount(3, $em->getListeners(MvcEvent::EVENT_ROUTE));
     }
 
     public function testStrategy()

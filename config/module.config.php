@@ -26,7 +26,9 @@ return [
 
         // Guard listeners to be attached to the application event manager.
         'guards' => [
-
+            'params_guard' => [
+                'name' => 'SpiffyAuthorize\Guard\RouteParamsGuard'
+            ]
         ],
 
         // The service locator name used to get strategy listener to handle permission errors.
