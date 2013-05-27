@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "09299dfe982f93905532b0c129750ba9",
+    "hash": "3fac9f2d2c64902221d0e7577a45120f",
     "packages": [
         {
             "name": "zendframework/zend-eventmanager",
@@ -1011,6 +1011,65 @@
             "time": "2013-05-01 21:52:50"
         },
         {
+            "name": "zendframework/zend-developer-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
+                "reference": "e998174c0d82e2cebf62d39144fd1e5f7eefb0f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/e998174c0d82e2cebf62d39144fd1e5f7eefb0f3",
+                "reference": "e998174c0d82e2cebf62d39144fd1e5f7eefb0f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-servicemanager": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-version": "2.*"
+            },
+            "suggest": {
+                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector."
+            },
+            "type": "zf-module",
+            "autoload": {
+                "psr-0": {
+                    "ZendDeveloperTools": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evan Coury",
+                    "email": "me@evancoury.com",
+                    "homepage": "http://blog.evan.pro/"
+                },
+                {
+                    "name": "Eric Boh",
+                    "email": "cossish@gmail.com"
+                }
+            ],
+            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
+            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
+            "keywords": [
+                "debug",
+                "developer",
+                "module",
+                "zf2"
+            ],
+            "time": "2013-05-25 16:48:25"
+        },
+        {
             "name": "zendframework/zend-di",
             "version": "2.2.0",
             "target-dir": "Zend/Di",
@@ -1873,6 +1932,46 @@
             "time": "2013-05-08 21:00:09"
         },
         {
+            "name": "zendframework/zend-version",
+            "version": "2.2.0",
+            "target-dir": "Zend/Version",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendVersion.git",
+                "reference": "release-2.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendVersion/zipball/release-2.2.0",
+                "reference": "release-2.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Version\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "keywords": [
+                "version",
+                "zf2"
+            ],
+            "time": "2013-05-15 10:37:37"
+        },
+        {
             "name": "zendframework/zend-view",
             "version": "2.2.0",
             "target-dir": "Zend/View",
@@ -1926,7 +2025,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "spiffy/spiffy-test": 20
+        "spiffy/spiffy-test": 20,
+        "zendframework/zend-developer-tools": 20
     },
     "platform": {
         "php": ">=5.3.3"
