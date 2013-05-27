@@ -18,10 +18,9 @@ use Zend\Mvc\MvcEvent;
  *
  * Route is a regular expression! No route definition means passthru!
  */
-class RouteGuard implements GuardInterface
+class RouteGuard extends AbstractGuard
 {
     use AuthorizeServiceAwareTrait;
-    use GuardTrait;
     use ListenerAggregateTrait;
 
     const INFO_AUTHORIZED          = 'info-authorized';
@@ -29,6 +28,43 @@ class RouteGuard implements GuardInterface
     const INFO_UNKNOWN_ROUTE       = 'info-unknown-route';
     const ERROR_UNAUTHORIZED_ROUTE = 'error-unauthorized-route';
     const RESOURCE_PREFIX          = 'route-';
+
+    /**
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
+     * @param array $rules
+     * @return RouteGuard
+     */
+    public function setRules(array $rules)
+    {
+        $cleaned = [];
+
+        foreach ($rules as $route => $permissions) {
+            if (is_numeric($permissions)) {
+                $route       = $permissions;
+                $permissions = [];
+            }
+
+            if (!is_array($permissions)) {
+                $permissions = [ $permissions ];
+            }
+
+            $cleaned[$route] = $permissions;
+        }
+        $this->rules = $cleaned;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRules()
+    {
+        return $this->rules;
+    }
 
     /**
      * Attach one or more listeners

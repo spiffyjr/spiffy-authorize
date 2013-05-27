@@ -6,7 +6,7 @@ use SpiffyAuthorize\Options\ModuleOptions;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-abstract class AbstractProviderFactory implements FactoryInterface
+abstract class AbstractInstanceFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -18,17 +18,16 @@ abstract class AbstractProviderFactory implements FactoryInterface
     {
         /** @var \SpiffyAuthorize\Options\ModuleOptions $options */
         $options   = $serviceLocator->get('SpiffyAuthorize\Options\ModuleOptions');
-        $providers = [];
+        $instances = [];
 
-        foreach ($this->getProviders($options) as $providerConfig) {
-            /** @var \SpiffyAuthorize\Provider\AbstractProvider $provider */
-            $provider = $this->get($serviceLocator, $providerConfig['name']);
-            $provider->setFromArray(isset($providerConfig['options']) ? $providerConfig['options'] : []);
+        foreach ($this->getInstances($options) as $config) {
+            $instance = $this->get($serviceLocator, $config['name']);
+            $instance->setFromArray(isset($config['options']) ? $config['options'] : []);
 
-            $providers[] = $provider;
+            $instances[] = $instance;
         }
 
-        return $providers;
+        return $instances;
     }
 
     /**
@@ -48,5 +47,5 @@ abstract class AbstractProviderFactory implements FactoryInterface
      * @param ModuleOptions $options
      * @return array
      */
-    abstract protected function getProviders(ModuleOptions $options);
+    abstract protected function getInstances(ModuleOptions $options);
 }

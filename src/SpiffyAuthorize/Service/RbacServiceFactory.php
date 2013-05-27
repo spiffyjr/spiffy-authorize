@@ -16,7 +16,15 @@ class RbacServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $perms = $serviceLocator->get('SpiffyAuthorize\PermissionProviders');
-        $roles = $serviceLocator->get('SpiffyAuthorize\RoleProviders');
+        $perms     = $serviceLocator->get('SpiffyAuthorize\PermissionProviders');
+        $roles     = $serviceLocator->get('SpiffyAuthorize\RoleProviders');
+        $providers = array_merge($perms, $roles);
+        $service   = new RbacService();
+
+        foreach ($providers as $provider) {
+            $service->getEventManager()->attach($provider);
+        }
+
+        return $service;
     }
 }

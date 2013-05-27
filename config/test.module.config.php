@@ -25,17 +25,21 @@ return [
         'guards' => [
             [
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'rules' => [
-                    'foo' => [
-                        'bar'
-                    ],
+                'options' => [
+                    'rules' => [
+                        'foo' => [
+                            'bar'
+                        ],
+                    ]
                 ]
             ],
             [
                 'name' => 'SpiffyAuthorize\Guard\RouteGuard',
-                'rules' => [
-                    'baz' => [
-                        'biz'
+                'options' => [
+                    'rules' => [
+                        'baz' => [
+                            'biz'
+                        ]
                     ]
                 ]
             ]

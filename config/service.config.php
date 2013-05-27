@@ -8,7 +8,8 @@ return [
         'SpiffyAuthorize\RoleProviders'         => 'SpiffyAuthorize\Service\ProviderRoleFactory',
 
         // Services that map directly to a class.
-        'SpiffyAuthorize\RbacService'           => 'SpiffyAuthorize\Service\RbacServiceFactory',
+        'SpiffyAuthorize\Guard\RouteGuard'      => 'SpiffyAuthorize\Service\GuardRouteGuardFactory',
+        'SpiffyAuthorize\Service\RbacService'   => 'SpiffyAuthorize\Service\RbacServiceFactory',
         'SpiffyAuthorize\Options\ModuleOptions' => 'SpiffyAuthorize\Service\OptionsModuleOptionsFactory'
     ]
 ];

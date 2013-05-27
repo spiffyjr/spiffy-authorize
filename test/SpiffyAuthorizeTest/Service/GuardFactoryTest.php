@@ -13,19 +13,23 @@ class GuardFactoryTest extends \PHPUnit_Framework_TestCase
         $config = [
             [
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'rules' => [
-                    'route' => [
-                        'perm1',
-                        'perm2'
+                'options' => [
+                    'rules' => [
+                        'route' => [
+                            'perm1',
+                            'perm2'
+                        ]
                     ]
                 ]
             ],
             [
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'rules' => [
-                    'route2' => [
-                        'perm3',
-                        'perm4'
+                'options' => [
+                    'rules' => [
+                        'route2' => [
+                            'perm3',
+                            'perm4'
+                        ]
                     ]
                 ]
             ]

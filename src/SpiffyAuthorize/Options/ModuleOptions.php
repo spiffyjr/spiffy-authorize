@@ -9,6 +9,11 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string
      */
+    protected $authorizeService = 'SpiffyAuthorize\Service\RbacService';
+
+    /**
+     * @var string
+     */
     protected $defaultRole = 'member';
 
     /**
@@ -45,6 +50,24 @@ class ModuleOptions extends AbstractOptions
      * @var string
      */
     protected $viewTemplate = 'error/403';
+
+    /**
+     * @param string $authorizeService
+     * @return ModuleOptions
+     */
+    public function setAuthorizeService($authorizeService)
+    {
+        $this->authorizeService = $authorizeService;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorizeService()
+    {
+        return $this->authorizeService;
+    }
 
     /**
      * @param string $viewTemplate

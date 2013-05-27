@@ -2,6 +2,9 @@
 
 return [
     'spiffy-authorize' => [
+        // The service locator name used to get the authorize service.
+        'authorize_service' => 'SpiffyAuthorize\Service\RbacService',
+
         // The role given to identities that are authenticated but do not have any roles themselves.
         'default_role' => 'member',
 

@@ -4,13 +4,13 @@ namespace SpiffyAuthorize\Service;
 
 use SpiffyAuthorize\Options\ModuleOptions;
 
-class ProviderRoleFactory extends AbstractProviderFactory
+class ProviderRoleFactory extends AbstractInstanceFactory
 {
     /**
      * @param ModuleOptions $options
      * @return array
      */
-    protected function getProviders(ModuleOptions $options)
+    protected function getInstances(ModuleOptions $options)
     {
         return $options->getRoleProviders();
     }

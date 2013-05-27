@@ -27,13 +27,6 @@ class Module implements
         foreach ($sm->get('SpiffyAuthorize\Guards') as $guard) {
             $app->getEventManager()->attach($guard);
         }
-        $providers = array_merge(
-            $sm->get('SpiffyAuthorize\PermissionProviders'),
-            $sm->get('SpiffyAuthorize\RoleProviders')
-        );
-        foreach ($providers as $provider) {
-            $app->getEventManager()->attach($provider);
-        }
     }
 
     /**

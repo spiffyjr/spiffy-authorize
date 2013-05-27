@@ -2,31 +2,16 @@
 
 namespace SpiffyAuthorize\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use SpiffyAuthorize\Options\ModuleOptions;
 
-class GuardFactory implements FactoryInterface
+class GuardFactory extends AbstractInstanceFactory
 {
-
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @param ModuleOptions $options
+     * @return array
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    protected function getInstances(ModuleOptions $options)
     {
-        $options = $serviceLocator->get('SpiffyAuthorize\Options\ModuleOptions');
-        $guards  = [];
-
-        foreach ($options->getGuards() as $guardConfig) {
-            /** @var \SpiffyAuthorize\Guard\GuardInterface $guard */
-            $guard = new $guardConfig['name'];
-            $guard->setRules($guardConfig['rules']);
-
-            $guards[] = $guard;
-        }
-
-        return $guards;
+        return $options->getGuards();
     }
 }
