@@ -3,7 +3,7 @@
     "description": "ZF2 authorization module for SpiffyCMS (can be used standalone).",
     "homepage": "http://www.github.com/spiffyjr/spiffy-authorize.git",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "zendframework/zend-eventmanager": "2.*",
         "zendframework/zend-stdlib": "2.*"
     },
