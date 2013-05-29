@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3fac9f2d2c64902221d0e7577a45120f",
+    "hash": "9107de77e04659d4e07816c0925e2ee8",
     "packages": [
         {
             "name": "zendframework/zend-eventmanager",
@@ -146,7 +146,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -710,12 +710,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiffyjr/spiffy-test.git",
-                "reference": "c8d3b7280454521015adb1e3232fd67504d12aa2"
+                "reference": "ec3d3aa45b810af6709d5a7b16fbc6f166c46e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiffyjr/spiffy-test/zipball/c8d3b7280454521015adb1e3232fd67504d12aa2",
-                "reference": "c8d3b7280454521015adb1e3232fd67504d12aa2",
+                "url": "https://api.github.com/repos/spiffyjr/spiffy-test/zipball/ec3d3aa45b810af6709d5a7b16fbc6f166c46e36",
+                "reference": "ec3d3aa45b810af6709d5a7b16fbc6f166c46e36",
                 "shasum": ""
             },
             "require": {
@@ -733,7 +733,7 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "PHPUnit bootstrapping module for ZF2",
             "homepage": "http://www.github.com/spiffyjr/spiffy-test.git",
-            "time": "2013-03-28 21:50:22"
+            "time": "2013-05-29 03:23:56"
         },
         {
             "name": "symfony/console",
@@ -1016,12 +1016,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "e998174c0d82e2cebf62d39144fd1e5f7eefb0f3"
+                "reference": "7974633b7b030004a8b032e47974979c774f6556"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/e998174c0d82e2cebf62d39144fd1e5f7eefb0f3",
-                "reference": "e998174c0d82e2cebf62d39144fd1e5f7eefb0f3",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/7974633b7b030004a8b032e47974979c774f6556",
+                "reference": "7974633b7b030004a8b032e47974979c774f6556",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-05-25 16:48:25"
+            "time": "2013-05-28 19:35:53"
         },
         {
             "name": "zendframework/zend-di",
@@ -2029,7 +2029,7 @@
         "zendframework/zend-developer-tools": 20
     },
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.4"
     },
     "platform-dev": [
 
