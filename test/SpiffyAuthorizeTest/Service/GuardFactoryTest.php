@@ -55,6 +55,6 @@ class GuardFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $rules1);
         $this->assertCount(1, $rules2);
         $this->assertEquals('perm1', $rules1['route'][0]);
-        $this->assertEquals('perm4', $guards[1]['route2'][1]);
+        $this->assertEquals('perm4', $rules2['route2'][1]);
     }
 }
