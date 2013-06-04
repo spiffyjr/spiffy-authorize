@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9107de77e04659d4e07816c0925e2ee8",
+    "hash": "3fac9f2d2c64902221d0e7577a45120f",
     "packages": [
         {
             "name": "zendframework/zend-eventmanager",
@@ -710,16 +710,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiffyjr/spiffy-test.git",
-                "reference": "ec3d3aa45b810af6709d5a7b16fbc6f166c46e36"
+                "reference": "6959d0d467e8e07d7214e69530b8b4739e0afff5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiffyjr/spiffy-test/zipball/ec3d3aa45b810af6709d5a7b16fbc6f166c46e36",
-                "reference": "ec3d3aa45b810af6709d5a7b16fbc6f166c46e36",
+                "url": "https://api.github.com/repos/spiffyjr/spiffy-test/zipball/6959d0d467e8e07d7214e69530b8b4739e0afff5",
+                "reference": "6959d0d467e8e07d7214e69530b8b4739e0afff5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "zendframework/zend-modulemanager": "2.*"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.*"
@@ -733,30 +734,36 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "PHPUnit bootstrapping module for ZF2",
             "homepage": "http://www.github.com/spiffyjr/spiffy-test.git",
-            "time": "2013-05-29 03:23:56"
+            "time": "2013-06-04 03:50:39"
         },
         {
             "name": "symfony/console",
-            "version": "v2.2.1",
+            "version": "v2.3.0",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "v2.2.1"
+                "reference": "v2.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.3.0",
+                "reference": "v2.3.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "symfony/event-dispatcher": ">=2.1,<3.0"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": ""
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -780,21 +787,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-19 20:48:08"
+            "time": "2013-05-30 05:11:26"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "v2.2.1"
+                "reference": "v2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.2.1",
-                "reference": "v2.2.1",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.2.2",
+                "reference": "v2.2.2",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +834,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-23 07:49:54"
+            "time": "2013-05-10 18:08:31"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -1016,12 +1023,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "7974633b7b030004a8b032e47974979c774f6556"
+                "reference": "1380eec964ebd2f0e28801190ffeb0e1d6444154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/7974633b7b030004a8b032e47974979c774f6556",
-                "reference": "7974633b7b030004a8b032e47974979c774f6556",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/1380eec964ebd2f0e28801190ffeb0e1d6444154",
+                "reference": "1380eec964ebd2f0e28801190ffeb0e1d6444154",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1074,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-05-28 19:35:53"
+            "time": "2013-06-04 10:49:25"
         },
         {
             "name": "zendframework/zend-di",
@@ -2029,7 +2036,7 @@
         "zendframework/zend-developer-tools": 20
     },
     "platform": {
-        "php": ">=5.4"
+        "php": ">=5.3.3"
     },
     "platform-dev": [
 
