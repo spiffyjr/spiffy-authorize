@@ -11,6 +11,6 @@ class EmptyIdentity implements IdentityInterface
      */
     public function getRoles()
     {
-        return [];
+        return array();
     }
 }

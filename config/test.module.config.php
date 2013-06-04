@@ -1,53 +1,53 @@
 <?php
 
-return [
-    'service_manager' => [
-        'invokables' => [
+return array(
+    'service_manager' => array(
+        'invokables' => array(
             'Zend\Authentication\AuthenticationService' => 'Zend\Authentication\AuthenticationService'
-        ]
-    ],
-    'spiffy_authorize' => [
-        'permission_providers' => [
-            [
+        )
+    ),
+    'spiffy_authorize' => array(
+        'permission_providers' => array(
+            array(
                 'name'    => 'SpiffyAuthorize\Provider\Permission\Config\RbacProvider',
-                'options' => [
-                    'rules' => [
-                        'foo' => [ 'bar', 'baz' ]
-                    ]
-                ]
-            ]
-        ],
-        'role_providers' => [
-            [
+                'options' => array(
+                    'rules' => array(
+                        'foo' => array( 'bar', 'baz' )
+                    )
+                )
+            )
+        ),
+        'role_providers' => array(
+            array(
                 'name'    => 'SpiffyAuthorize\Provider\Role\Config\RbacProvider',
-                'options' => [
-                    'rules' => [
-                        'admin' => ['moderator']
-                    ]
-                ]
-            ]
-        ],
-        'guards' => [
-            [
+                'options' => array(
+                    'rules' => array(
+                        'admin' => array('moderator')
+                    )
+                )
+            )
+        ),
+        'guards' => array(
+            array(
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'options' => [
-                    'rules' => [
-                        'foo' => [
+                'options' => array(
+                    'rules' => array(
+                        'foo' => array(
                             'bar'
-                        ],
-                    ]
-                ]
-            ],
-            [
+                        ),
+                    )
+                )
+            ),
+            array(
                 'name' => 'SpiffyAuthorize\Guard\RouteGuard',
-                'options' => [
-                    'rules' => [
-                        'baz' => [
+                'options' => array(
+                    'rules' => array(
+                        'baz' => array(
                             'biz'
-                        ]
-                    ]
-                ]
-            ]
-        ],
-    ]
-];
+                        )
+                    )
+                )
+            )
+        ),
+    )
+);

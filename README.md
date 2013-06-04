@@ -14,8 +14,7 @@ for more detailed documentation on the features provided by this module.
 
 ## Requirements
 
-* PHP 5.4
-* Zend EventManager
+* PHP 5.3.3
 * Composer
 
 ## Installation

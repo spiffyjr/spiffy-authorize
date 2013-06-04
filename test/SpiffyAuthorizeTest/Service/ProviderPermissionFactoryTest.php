@@ -13,6 +13,6 @@ class ProviderPermissionFactoryTest extends TestCase
         $providers = $factory->createService($this->getServiceManager());
 
         $this->assertCount(1, $providers);
-        $this->assertEquals(['foo' => ['bar', 'baz']], $providers[0]->getRules());
+        $this->assertEquals(array('foo' => array('bar', 'baz')), $providers[0]->getRules());
     }
 }

@@ -15,14 +15,17 @@ use Zend\View\Model\ViewModel;
 
 class UnauthorizedStrategy implements ListenerAggregateInterface
 {
-    use ListenerAggregateTrait;
-
     const ERROR_UNAUTHORIZED = 'error-unauthorized';
 
     /**
      * @var string
      */
     protected $template = 'error/403';
+
+    /**
+     * @var \Zend\Stdlib\CallbackHandlerarray()
+     */
+    protected $listeners = array();
 
     /**
      * @param string $template
@@ -43,18 +46,23 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the EventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param EventManagerInterface $events
-     *
-     * @return void
+     * {@inheritDoc}
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError']);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'onDispatchError'));
     }
 
     /**
@@ -69,9 +77,9 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $vars = [
+        $vars = array(
             'error' => $e->getError()
-        ];
+        );
 
         switch ($e->getError()) {
             case RouteGuard::ERROR_UNAUTHORIZED_ROUTE:

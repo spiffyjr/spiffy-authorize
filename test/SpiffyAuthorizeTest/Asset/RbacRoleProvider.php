@@ -10,21 +10,29 @@ use Zend\Permissions\Rbac\Role;
 
 class RbacRoleProvider implements ProviderInterface
 {
-    use ListenerAggregateTrait;
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
 
     /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the EventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param EventManagerInterface $events
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $events->attach(AuthorizeEvent::EVENT_INIT, array($this, 'load'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
+        }
     }
 
     /**

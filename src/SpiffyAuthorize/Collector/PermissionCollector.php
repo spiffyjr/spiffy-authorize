@@ -25,7 +25,7 @@ class PermissionCollector implements
     /**
      * @var array
      */
-    protected $permissions = [];
+    protected $permissions = array();
 
     /**
      * @param RbacService $rbacService
@@ -81,7 +81,7 @@ class PermissionCollector implements
         /** @var \Zend\Permissions\Rbac\Rbac $rbac */
         $rbac        = $service->getContainer();
         $roles       = $provider->getIdentityRoles();
-        $permissions = [];
+        $permissions = array();
 
         // No getPermissions() available, have to use reflection.
         $reflClass    = new ReflectionClass('Zend\Permissions\Rbac\Role');
@@ -91,7 +91,7 @@ class PermissionCollector implements
         foreach ($roles as $role) {
             if ($rbac->hasRole($role)) {
                 if (!isset($permissions[$role])) {
-                    $permissions[$role] = [];
+                    $permissions[$role] = array();
                 }
                 $permissions[$role] = array_merge($reflProperty->getValue($rbac->getRole($role)), $permissions[$role]);
 

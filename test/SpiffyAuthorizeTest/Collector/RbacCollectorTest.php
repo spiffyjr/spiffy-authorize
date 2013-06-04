@@ -13,16 +13,16 @@ class RbacCollectorTest extends \PHPUnit_Framework_TestCase
     {
         $collector = $this->getCollector();
 
-        $this->assertEquals(serialize(['guest']), $collector->serialize());
+        $this->assertEquals(serialize(array('guest')), $collector->serialize());
 
-        $collector->unserialize(serialize(['guest']));
+        $collector->unserialize(serialize(array('guest')));
 
-        $this->assertEquals(['guest'], $collector->getRoles());
+        $this->assertEquals(array('guest'), $collector->getRoles());
     }
 
     public function testCollectedRoles()
     {
-        $this->assertEquals(['guest'], $this->getCollector()->getRoles());
+        $this->assertEquals(array('guest'), $this->getCollector()->getRoles());
     }
 
     /**

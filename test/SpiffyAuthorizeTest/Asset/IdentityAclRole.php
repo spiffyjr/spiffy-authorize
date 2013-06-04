@@ -12,9 +12,9 @@ class IdentityAclRole implements IdentityInterface
      */
     public function getRoles()
     {
-        return [
+        return array(
             new GenericRole('foo'),
             new GenericRole('bar')
-        ];
+        );
     }
 }

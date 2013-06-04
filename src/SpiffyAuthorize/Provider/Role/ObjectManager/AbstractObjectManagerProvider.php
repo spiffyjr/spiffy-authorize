@@ -4,17 +4,14 @@ namespace SpiffyAuthorize\Provider\Role\ObjectManager;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SpiffyAuthorize\AuthorizeEvent;
-use SpiffyAuthorize\Provider\AbstractProvider;
-use SpiffyAuthorize\Provider\Role\ExtractorTrait;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Rbac;
+use Zend\Stdlib\AbstractOptions;
 
-abstract class AbstractObjectManagerProvider extends AbstractProvider implements ProviderInterface
+abstract class AbstractObjectManagerProvider extends AbstractOptions implements ProviderInterface
 {
-    use ExtractorTrait;
-    use ListenerAggregateTrait;
-
     /**
      * @var ObjectManager
      */
@@ -24,6 +21,11 @@ abstract class AbstractObjectManagerProvider extends AbstractProvider implements
      * @var string
      */
     protected $targetClass;
+
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
 
     /**
      * @param ObjectManager $objectManager
@@ -62,18 +64,23 @@ abstract class AbstractObjectManagerProvider extends AbstractProvider implements
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the EventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param EventManagerInterface $events
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, array($this, 'load'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
+        }
     }
 
     /**
@@ -82,7 +89,7 @@ abstract class AbstractObjectManagerProvider extends AbstractProvider implements
     public function load(AuthorizeEvent $e)
     {
         $result = $this->getObjectManager()->getRepository($this->getTargetClass())->findAll();
-        $roles  = [];
+        $roles  = array();
 
         foreach ($result as $entity) {
             $role   = $this->extractRole($entity);
@@ -91,11 +98,47 @@ abstract class AbstractObjectManagerProvider extends AbstractProvider implements
             if ($parent) {
                 $roles[$parent][] = $role;
             } else if (!isset($roles[$role])) {
-                $roles[$role] = [];
+                $roles[$role] = array();
             }
         }
 
-        $this->loadRoles($e->getTarget(), $roles);
+        /** @var \Zend\Permissions\Rbac\Rbac $rbac */
+        $rbac = $e->getTarget();
+        $this->loadRoles($rbac, $roles);
+    }
+
+    /**
+     * Examines an entity and extracts the role if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractRole($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getName();
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return $entity;
+        }
+        return null;
+    }
+
+    /**
+     * Examines an entity and extracts the parent if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractParent($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getParent() ? $entity->getParent()->getName() : null;
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return null;
+        }
+        return null;
     }
 
     /**

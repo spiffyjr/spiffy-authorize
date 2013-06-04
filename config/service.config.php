@@ -1,7 +1,7 @@
 <?php
 
-return [
-    'factories' => [
+return array(
+    'factories' => array(
         // Services that do not have an associated class.
         'SpiffyAuthorize\Guards'              => 'SpiffyAuthorize\Service\GuardFactory',
         'SpiffyAuthorize\PermissionProviders' => 'SpiffyAuthorize\Service\ProviderPermissionFactory',
@@ -16,9 +16,9 @@ return [
         'SpiffyAuthorize\Service\RbacService'                => 'SpiffyAuthorize\Service\RbacServiceFactory',
         'SpiffyAuthorize\Options\ModuleOptions'              => 'SpiffyAuthorize\Service\OptionsModuleFactory',
         'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy' => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
-    ],
+    ),
 
-    'invokables' => [
+    'invokables' => array(
         'SpiffyAuthorize\Provider\Identity\AuthenticationProvider' => 'SpiffyAuthorize\Provider\Identity\AuthenticationProvider',
-    ]
-];
+    )
+);

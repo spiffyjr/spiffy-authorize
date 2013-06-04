@@ -5,17 +5,15 @@ namespace SpiffyAuthorize\Provider\Permission\ObjectManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
-use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Permission;
 use SpiffyAuthorize\Provider\Role;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Rbac;
+use Zend\Stdlib\AbstractOptions;
 
-class RbacProvider extends AbstractProvider implements Permission\ProviderInterface
+class RbacProvider extends AbstractOptions implements Permission\ProviderInterface
 {
-    use ListenerAggregateTrait;
-    use Role\ExtractorTrait;
-
     /**
      * @var ObjectManager
      */
@@ -25,6 +23,11 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
      * @var string
      */
     protected $targetClass;
+
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
 
     /**
      * @param ObjectManager $ObjectManager
@@ -63,18 +66,57 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the EventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param EventManagerInterface $events
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load'], -100);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, array($this, 'load'), -100);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
+    /**
+     * Examines an entity and extracts the role if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractRole($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getName();
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return $entity;
+        }
+        return null;
+    }
+
+    /**
+     * Examines an entity and extracts the parent if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractParent($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getParent() ? $entity->getParent()->getName() : null;
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return null;
+        }
+        return null;
     }
 
     /**
@@ -99,7 +141,7 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
 
         foreach ($result as $entity) {
             $permission = null;
-            $roles      = [];
+            $roles      = array();
 
             if ($entity instanceof PermissionInterface) {
                 $permission = $entity->getName();
@@ -115,7 +157,7 @@ class RbacProvider extends AbstractProvider implements Permission\ProviderInterf
                 }
 
                 if (!is_array($roles)) {
-                    $roles = [ $roles ];
+                    $roles = array($roles);
                 }
             } else {
                 throw new Permission\Exception\InvalidArgumentException('unknown permission entity type');

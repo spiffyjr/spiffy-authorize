@@ -19,7 +19,7 @@ trait RbacProviderTrait
         foreach ($roles as $parent => $children) {
             if (is_numeric($parent)) {
                 $parent   = $children;
-                $children = [];
+                $children = array();
             }
 
             if ($parentName) {

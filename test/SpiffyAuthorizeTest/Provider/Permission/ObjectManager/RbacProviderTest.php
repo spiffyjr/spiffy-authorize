@@ -48,10 +48,10 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testPermissionInterfacePermissions()
     {
-        $result = [
-            new Asset\Permission('foo', ['role1', 'subchild2']),
-            new Asset\Permission('bar', ['child2'])
-        ];
+        $result = array(
+            new Asset\Permission('foo', array('role1', 'subchild2')),
+            new Asset\Permission('bar', array('child2'))
+        );
 
         $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
@@ -76,11 +76,11 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayPermissions()
     {
-        $result = [
-            [ 'foo' => ['role1', 'subchild2'] ],
-            [ 'bar' => ['child2'] ],
-            [ 'baz' => 'child2' ]
-        ];
+        $result = array(
+            array( 'foo' => array('role1', 'subchild2') ),
+            array( 'bar' => array('child2') ),
+            array( 'baz' => 'child2' )
+        );
 
         $or = m::mock('Doctrine\ORM\EntityRepository');
         $or->shouldReceive('findAll')->andReturn($result);
@@ -106,7 +106,7 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testStringPermissionsException()
     {
-        $result = ['foo'];
+        $result = array('foo');
         $roles  = new Asset\RbacRoleProvider();
 
         $or = m::mock('Doctrine\ORM\EntityRepository');
@@ -133,7 +133,7 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayPermissionsException()
     {
-        $result = [ [ 'foo' ] ];
+        $result = array( array( 'foo' ) );
         $roles  = new Asset\RbacRoleProvider();
 
         $or = m::mock('Doctrine\ORM\EntityRepository');

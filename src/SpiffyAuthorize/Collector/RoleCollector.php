@@ -4,16 +4,18 @@ namespace SpiffyAuthorize\Collector;
 
 use Serializable;
 use SpiffyAuthorize\Provider\Identity\ProviderInterface;
-use SpiffyAuthorize\Provider\Role\ExtractorTrait;
 use Zend\Mvc\MvcEvent;
+use Zend\Permissions\Acl;
+use Zend\Permissions\Rbac;
 use ZendDeveloperTools\Collector\CollectorInterface;
 
+/**
+ * todo: implement ExtractorTrait in PHP 5.4
+ */
 class RoleCollector implements
     CollectorInterface,
     Serializable
 {
-    use ExtractorTrait;
-
     const NAME     = 'spiffy_authorize_role_collector';
     const PRIORITY = 100;
 
@@ -25,7 +27,7 @@ class RoleCollector implements
     /**
      * @var array
      */
-    protected $roles = [];
+    protected $roles = array();
 
     /**
      * @param ProviderInterface $identityProvider
@@ -75,7 +77,7 @@ class RoleCollector implements
         }
 
         $roles   = $this->identityProvider->getIdentityRoles();
-        $cleaned = [];
+        $cleaned = array();
 
         foreach ($roles as $role) {
             $cleaned[] = $this->extractRole($role);
@@ -107,5 +109,39 @@ class RoleCollector implements
     public function unserialize($serialized)
     {
         $this->roles = unserialize($serialized);
+    }
+
+    /**
+     * Examines an entity and extracts the role if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractRole($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getName();
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return $entity;
+        }
+        return null;
+    }
+
+    /**
+     * Examines an entity and extracts the parent if one is available.
+     * @param $entity
+     * @return null|string
+     */
+    public function extractParent($entity)
+    {
+        if ($entity instanceof Rbac\RoleInterface) {
+            return $entity->getParent() ? $entity->getParent()->getName() : null;
+        } else if ($entity instanceof Acl\Role\RoleInterface) {
+            // todo: implement me
+        } else if (is_string($entity)) {
+            return null;
+        }
+        return null;
     }
 }

@@ -11,6 +11,6 @@ class Identity implements IdentityInterface
      */
     public function getRoles()
     {
-        return ['role1'];
+        return array('role1');
     }
 }

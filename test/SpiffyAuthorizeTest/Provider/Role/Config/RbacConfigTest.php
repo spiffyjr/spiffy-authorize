@@ -10,18 +10,18 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
     public function testParentsContainingChildren()
     {
         $provider = new RbacProvider();
-        $provider->setRules([
-            'parent1' => [
+        $provider->setRules(array(
+            'parent1' => array(
                 'child1',
-                'child2' => [
+                'child2' => array(
                     'subchild1'
-                ]
-            ],
-            'parent2' => [
+                )
+            ),
+            'parent2' => array(
                 'child2'
-            ],
+            ),
             'parent2'
-        ]);
+        ));
 
         $service = new RbacService();
         $service->getEventManager()->attach($provider);
@@ -40,11 +40,11 @@ class RbacConfigTest extends \PHPUnit_Framework_TestCase
     public function testParentsOnly()
     {
         $provider = new RbacProvider();
-        $provider->setRules([
-            'parent1' => [],
+        $provider->setRules(array(
+            'parent1' => array(),
             'parent2',
             'parent2'
-        ]);
+        ));
 
         $service = new RbacService();
         $service->getEventManager()->attach($provider);

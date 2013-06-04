@@ -14,7 +14,8 @@ foreach ($permissions as $rolePermissions) {
                <span class="zdt-toolbar-extra-info">
                 <?php
                 if (1 === $permissionsCount) {
-                    echo $this->escapeHtml(array_keys(reset($permissions))[0]);
+                    $keys = array_keys(reset($permissions));
+                    echo $this->escapeHtml($keys[0]);
                 } elseif ($permissionsCount > 1) {
                     echo $permissionsCount . ' permissions';
                 }

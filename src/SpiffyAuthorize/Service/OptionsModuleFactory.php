@@ -16,6 +16,7 @@ class OptionsModuleFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new ModuleOptions($serviceLocator->get('Configuration')['spiffy_authorize']);
+        $config = $serviceLocator->get('Configuration');
+        return new ModuleOptions($config['spiffy_authorize']);
     }
 }

@@ -3,10 +3,9 @@
 namespace SpiffyAuthorize\Provider\Role\Config;
 
 use SpiffyAuthorize\AuthorizeEvent;
-use SpiffyAuthorize\Provider\AbstractProvider;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateTrait;
+use Zend\Stdlib\AbstractOptions;
 
 /**
  * Loads a configuration based role map into the container.
@@ -21,14 +20,17 @@ use Zend\EventManager\ListenerAggregateTrait;
  *
  * A numeric index will be treated as a role with no children.
  */
-abstract class AbstractConfigProvider extends AbstractProvider implements ProviderInterface
+abstract class AbstractConfigProvider extends AbstractOptions implements ProviderInterface
 {
-    use ListenerAggregateTrait;
-
     /**
      * @var array
      */
-    protected $rules = [];
+    protected $rules = array();
+
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
+    protected $listeners = array();
 
     /**
      * @param array $rules
@@ -49,18 +51,23 @@ abstract class AbstractConfigProvider extends AbstractProvider implements Provid
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the EventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param EventManagerInterface $events
-     *
-     * @return void
+     * {@inheritDoc}
+     */
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, [$this, 'load']);
+        $this->listeners[] = $events->attach(AuthorizeEvent::EVENT_INIT, array($this, 'load'));
     }
 
     /**

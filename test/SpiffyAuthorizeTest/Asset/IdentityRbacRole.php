@@ -12,9 +12,9 @@ class IdentityRbacRole implements IdentityInterface
      */
     public function getRoles()
     {
-        return [
+        return array(
             new Role('foo'),
             new Role('bar')
-        ];
+        );
     }
 }

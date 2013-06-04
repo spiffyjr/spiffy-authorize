@@ -3,14 +3,21 @@
 namespace SpiffyAuthorize\Provider\Identity;
 
 use SpiffyAuthorize\Identity\IdentityInterface;
-use SpiffyAuthorize\Provider\AbstractProvider;
 use Zend\Authentication\AuthenticationService;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
 
-class AuthenticationProvider extends AbstractProvider implements ProviderInterface
+class AuthenticationProvider implements ProviderInterface
 {
-    use ProviderTrait;
+    /**
+     * @var string
+     */
+    protected $defaultGuestRole = 'guest';
+
+    /**
+     * @var string
+     */
+    protected $defaultRole = 'member';
 
     /**
      * @var AuthenticationService
@@ -39,6 +46,42 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
     }
 
     /**
+     * @param string $defaultRole
+     * @return AuthenticationProvider
+     */
+    public function setDefaultRole($defaultRole)
+    {
+        $this->defaultRole = $defaultRole;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultRole()
+    {
+        return $this->defaultRole;
+    }
+
+    /**
+     * @param string $defaultGuestRole
+     * @return AuthenticationProvider
+     */
+    public function setDefaultGuestRole($defaultGuestRole)
+    {
+        $this->defaultGuestRole = $defaultGuestRole;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultGuestRole()
+    {
+        return $this->defaultGuestRole;
+    }
+
+    /**
      * Gets the roles for the identity.
      *
      * @return array
@@ -46,7 +89,7 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
     public function getIdentityRoles()
     {
         if (!$this->getAuthService()->hasIdentity()) {
-            return [$this->getDefaultGuestRole()];
+            return array($this->getDefaultGuestRole());
         }
 
         $identity = $this->getAuthService()->getIdentity();
@@ -64,6 +107,6 @@ class AuthenticationProvider extends AbstractProvider implements ProviderInterfa
             return $roles;
         }
 
-        return [$this->getDefaultRole()];
+        return array($this->getDefaultRole());
     }
 }

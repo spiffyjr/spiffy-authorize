@@ -29,17 +29,17 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $permissionProviders = [];
+    protected $permissionProviders = array();
 
     /**
      * @var array
      */
-    protected $roleProviders = [];
+    protected $roleProviders = array();
 
     /**
      * @var array
      */
-    protected $guards = [];
+    protected $guards = array();
 
     /**
      * @var string

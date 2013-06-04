@@ -18,11 +18,11 @@ abstract class AbstractInstanceFactory implements FactoryInterface
     {
         /** @var \SpiffyAuthorize\Options\ModuleOptions $options */
         $options   = $serviceLocator->get('SpiffyAuthorize\Options\ModuleOptions');
-        $instances = [];
+        $instances = array();
 
         foreach ($this->getInstances($options) as $config) {
             $instance = $this->get($serviceLocator, $config['name']);
-            $options  = isset($config['options']) ? $config['options'] : [];
+            $options  = isset($config['options']) ? $config['options'] : array();
 
             foreach ($options as &$value) {
                 $value = $this->get($serviceLocator, $value, false);

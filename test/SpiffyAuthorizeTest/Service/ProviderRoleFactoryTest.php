@@ -13,6 +13,6 @@ class ProviderRoleFactoryTest extends TestCase
         $providers = $factory->createService($this->getServiceManager());
 
         $this->assertCount(1, $providers);
-        $this->assertEquals(['admin' => ['moderator']], $providers[0]->getRules());
+        $this->assertEquals(array('admin' => array('moderator')), $providers[0]->getRules());
     }
 }

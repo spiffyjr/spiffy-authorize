@@ -10,11 +10,11 @@ class OptionsModuleFactoryTest extends \PHPUnit_Framework_TestCase
     public function testModuleOptionsInstanceReturned()
     {
         $serviceManager = new ServiceManager();
-        $serviceManager->setService('Configuration', [
-            'spiffy_authorize' => [
+        $serviceManager->setService('Configuration', array(
+            'spiffy_authorize' => array(
                 'default_role' => 'foo'
-            ]
-        ]);
+            )
+        ));
 
         $factory = new OptionsModuleFactory();
         $options = $factory->createService($serviceManager);

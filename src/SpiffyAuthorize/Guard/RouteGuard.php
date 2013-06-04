@@ -20,7 +20,7 @@ class RouteGuard extends AbstractGuard
     /**
      * @var array
      */
-    protected $rules = [];
+    protected $rules = array();
 
     /**
      * @param array $rules
@@ -28,16 +28,16 @@ class RouteGuard extends AbstractGuard
      */
     public function setRules(array $rules)
     {
-        $cleaned = [];
+        $cleaned = array();
 
         foreach ($rules as $route => $permissions) {
             if (is_numeric($permissions)) {
                 $route       = $permissions;
-                $permissions = [];
+                $permissions = array();
             }
 
             if (!is_array($permissions)) {
-                $permissions = [ $permissions ];
+                $permissions = array($permissions);
             }
 
             $cleaned[$route] = $permissions;
@@ -70,7 +70,7 @@ class RouteGuard extends AbstractGuard
 
         $routeName   = $routeMatch->getMatchedRouteName();
         $isMatch     = false;
-        $resources   = [];
+        $resources   = array();
 
         foreach (array_keys($this->rules) as $routeRegex) {
             $result = @preg_match("/{$routeRegex}/", $routeName);

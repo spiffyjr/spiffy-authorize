@@ -6,7 +6,7 @@ use SpiffyAuthorize\Service\AuthorizeServiceInterface;
 
 class AuthorizeService implements AuthorizeServiceInterface
 {
-    protected $resources = ['foo', 'really-allowed', 'route-foo'];
+    protected $resources = array('foo', 'really-allowed', 'route-foo');
 
     /**
      * Return the container that is used for authorization.
@@ -15,7 +15,7 @@ class AuthorizeService implements AuthorizeServiceInterface
      */
     public function getContainer()
     {
-        return [];
+        return array();
     }
 
     /**
@@ -39,7 +39,7 @@ class AuthorizeService implements AuthorizeServiceInterface
      */
     public function hasRole($role)
     {
-        return in_array($role, ['role1']);
+        return in_array($role, array('role1'));
     }
 
     /**

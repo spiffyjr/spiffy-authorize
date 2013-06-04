@@ -97,10 +97,10 @@ class RbacServiceTest extends \PHPUnit_Framework_TestCase
     {
         $rbac = new RbacService();
         $rbac->registerAssertion('foo.bar', function() {});
-        $this->assertEquals(['foo.bar' => function() {}], $rbac->getAssertions());
+        $this->assertEquals(array('foo.bar' => function() {}), $rbac->getAssertions());
 
         $rbac->registerAssertion('foo.bar', new SimpleAssertion());
-        $this->assertEquals(['foo.bar' => new SimpleAssertion()], $rbac->getAssertions());
+        $this->assertEquals(array('foo.bar' => new SimpleAssertion()), $rbac->getAssertions());
 
         $this->setExpectedException('SpiffyAuthorize\Assertion\Exception\InvalidArgumentException');
 
@@ -109,10 +109,10 @@ class RbacServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testClearAssertions()
     {
-        $assertions = [
+        $assertions = array(
             'foo' => function() {},
             'bar' => new SimpleAssertion()
-        ];
+        );
 
         $rbac = new RbacService();
         $rbac->setAssertions($assertions);
@@ -125,18 +125,18 @@ class RbacServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingAssertions()
     {
-        $assertions = [
+        $assertions = array(
             'foo' => function() {},
             'bar' => new SimpleAssertion()
-        ];
+        );
 
         $rbac = new RbacService();
         $rbac->setAssertions($assertions);
         $this->assertCount(2, $rbac->getAssertions());
 
         $this->setExpectedException('SpiffyAuthorize\Assertion\Exception\InvalidArgumentException');
-        $rbac->setAssertions([
+        $rbac->setAssertions(array(
             'foo' => false
-        ]);
+        ));
     }
 }

@@ -10,30 +10,30 @@ class GuardFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testGuardsCreated()
     {
-        $config = [
-            [
+        $config = array(
+            array(
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'options' => [
-                    'rules' => [
-                        'route' => [
+                'options' => array(
+                    'rules' => array(
+                        'route' => array(
                             'perm1',
                             'perm2'
-                        ]
-                    ]
-                ]
-            ],
-            [
+                        )
+                    )
+                )
+            ),
+            array(
                 'name'  => 'SpiffyAuthorize\Guard\RouteGuard',
-                'options' => [
-                    'rules' => [
-                        'route2' => [
+                'options' => array(
+                    'rules' => array(
+                        'route2' => array(
                             'perm3',
                             'perm4'
-                        ]
-                    ]
-                ]
-            ]
-        ];
+                        )
+                    )
+                )
+            )
+        );
 
         $options = new ModuleOptions();
         $options->setGuards($config);
@@ -49,9 +49,12 @@ class GuardFactoryTest extends \PHPUnit_Framework_TestCase
             $this->assertInstanceOf('SpiffyAuthorize\Guard\GuardInterface', $guard);
         }
 
-        $this->assertCount(1, $guards[0]->getRules());
-        $this->assertCount(1, $guards[1]->getRules());
-        $this->assertEquals('perm1', $guards[0]->getRules()['route'][0]);
-        $this->assertEquals('perm4', $guards[1]->getRules()['route2'][1]);
+        $rules1 = $guards[0]->getRules();
+        $rules2 = $guards[1]->getRules();
+
+        $this->assertCount(1, $rules1);
+        $this->assertCount(1, $rules2);
+        $this->assertEquals('perm1', $rules1['route'][0]);
+        $this->assertEquals('perm4', $guards[1]['route2'][1]);
     }
 }

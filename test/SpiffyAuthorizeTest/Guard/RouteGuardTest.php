@@ -16,7 +16,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         $mvcEvent = $this->getMvcEvent('i-do-not-know');
 
         $guard = new RouteGuard();
-        $guard->setRules(['foo' => [ 'no-access' ]]);
+        $guard->setRules(array('foo' => array( 'no-access' )));
         $guard->setAuthorizeService(new AuthorizeService());
         $guard->onRoute($mvcEvent);
 
@@ -39,7 +39,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         $mvcEvent = $this->getMvcEvent('foo');
 
         $guard = new RouteGuard();
-        $guard->setRules(['foo' => [ 'no-access' ]]);
+        $guard->setRules(array('foo' => array( 'no-access' )));
         $guard->setAuthorizeService(new AuthorizeService());
         $guard->onRoute($mvcEvent);
 
@@ -57,7 +57,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         });
 
         $guard = new RouteGuard();
-        $guard->setRules(['foo' => [ 'no-access' ]]);
+        $guard->setRules(array('foo' => array( 'no-access' )));
         $guard->setAuthorizeService(new AuthorizeService());
         $guard->onRoute($mvcEvent);
 
@@ -69,7 +69,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         $mvcEvent = $this->getMvcEvent('foo');
 
         $guard = new RouteGuard();
-        $guard->setRules(['foo' => [ 'no-access', 'route-foo' ]]);
+        $guard->setRules(array('foo' => array( 'no-access', 'route-foo' )));
         $guard->setAuthorizeService(new AuthorizeService());
         $guard->onRoute($mvcEvent);
 
@@ -83,7 +83,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         );
 
         $guard = new RouteGuard();
-        $guard->setRules(['^f\w\w$' => [ 'route-foo' ]]);
+        $guard->setRules(array('^f\w\w$' => array( 'route-foo' )));
         $guard->setAuthorizeService(new AuthorizeService());
         $guard->onRoute($mvcEvent);
 
@@ -107,7 +107,7 @@ class RouteGuardTest extends \PHPUnit_Framework_TestCase
         $app->shouldReceive('getEventManager')
             ->andReturn(new EventManager());
 
-        $routeMatch = new RouteMatch([]);
+        $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName($route);
 
         $mvcEvent = new MvcEvent();

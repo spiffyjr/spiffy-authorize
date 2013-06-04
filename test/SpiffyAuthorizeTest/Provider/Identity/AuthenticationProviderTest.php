@@ -16,7 +16,7 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new AuthenticationProvider();
         $provider->setAuthService(new AuthenticationService());
 
-        $this->assertEquals([$provider->getDefaultGuestRole()], $provider->getIdentityRoles());
+        $this->assertEquals(array($provider->getDefaultGuestRole()), $provider->getIdentityRoles());
     }
 
     public function testAuthServiceIsLazyLoaded()
@@ -36,11 +36,11 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $service  = new AuthenticationService();
         $provider = new AuthenticationProvider();
 
-        $service->getStorage()->write([]);
-        $this->assertEquals([$provider->getDefaultRole()], $provider->getIdentityRoles());
+        $service->getStorage()->write(array());
+        $this->assertEquals(array($provider->getDefaultRole()), $provider->getIdentityRoles());
 
         $service->getStorage()->write(new EmptyIdentity());
-        $this->assertEquals([$provider->getDefaultRole()], $provider->getIdentityRoles());
+        $this->assertEquals(array($provider->getDefaultRole()), $provider->getIdentityRoles());
     }
 
     public function testRbacRolesConvertedToString()
@@ -52,7 +52,7 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $provider->setAuthService($service);
         $result = $provider->getIdentityRoles();
 
-        $this->assertEquals(['foo','bar'], $result);
+        $this->assertEquals(array('foo','bar'), $result);
     }
 
     public function testAclRolesConvertedToString()
@@ -64,7 +64,7 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $provider->setAuthService($service);
         $result = $provider->getIdentityRoles();
 
-        $this->assertEquals(['foo','bar'], $result);
+        $this->assertEquals(array('foo','bar'), $result);
     }
 
     public function testObjectsConvertedToString()
@@ -76,6 +76,6 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $provider->setAuthService($service);
         $result   = $provider->getIdentityRoles();
 
-        $this->assertEquals(['foo','bar'], $result);
+        $this->assertEquals(array('foo','bar'), $result);
     }
 }

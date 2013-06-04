@@ -3,7 +3,6 @@
 namespace SpiffyAuthorize\Guard;
 
 use SpiffyAuthorize\Exception\RuntimeException;
-use Zend\EventManager\ListenerAggregateTrait;
 use Zend\Mvc\MvcEvent;
 
 /**
