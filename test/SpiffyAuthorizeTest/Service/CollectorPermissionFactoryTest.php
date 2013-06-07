@@ -34,7 +34,11 @@ class CollectorPermissionFactoryTest extends \PHPUnit_Framework_TestCase
         $instance = $factory->createService($sm);
         $instance->collect(new MvcEvent());
 
+        $permissions = $instance->getPermissions();
+
         $this->assertInstanceOf('SpiffyAuthorize\Collector\PermissionCollector', $instance);
-        $this->assertCount(1, $instance->getPermissions());
+        $this->assertCount(1, $permissions);
+        $this->assertArrayHasKey('role1', $permissions);
+        $this->assertCount(3, $permissions['role1']);
     }
 }

@@ -95,10 +95,7 @@ class PermissionCollector implements
                 }
                 $permissions[$role] = array_merge($reflProperty->getValue($rbac->getRole($role)), $permissions[$role]);
 
-                $it = new RecursiveIteratorIterator(
-                    $rbac->getRole($role),
-                    RecursiveIteratorIterator::SELF_FIRST
-                );
+                $it = new RecursiveIteratorIterator($rbac->getRole($role), RecursiveIteratorIterator::SELF_FIRST);
                 foreach ($it as $leaf) {
                     $permissions[$role] = array_merge($reflProperty->getValue($leaf), $permissions[$role]);
                 }

@@ -103,6 +103,8 @@ class AuthenticationProvider implements ProviderInterface
                     $roles[$key] = $role->getName();
                 } else if (is_object($role)) {
                     $roles[$key] = (string) $role;
+                } else {
+                    $roles[$key] = $role;
                 }
             }
             return $roles;
