@@ -9,21 +9,21 @@ The Config\RbacProvider takes a simple array and prepares the Rbac container usi
 would look like:
 
 ```php
-return [
-    'spiffy_authorize' => [
-        'role_providers' => [
-            [
+return array(
+    'spiffy_authorize' => array(
+        'role_providers' => array(
+            array(
                 'name' => 'SpiffyAuthorize\Provider\Role\Config\RbacProvider',
-                'options' => [
-                    'rules' => [
-                        'parent1' => ['child1,'child2','child3'],
-                        'child2'  => ['subchild1']
-                    ]
-                ]
-            ]
-        ]
-    ]
-];
+                'options' => array(
+                    'rules' => array(
+                        'parent1' => array('child1,'child2','child3'),
+                        'child2'  => array('subchild1')
+                    )
+                )
+            )
+        )
+    )
+);
 ```
 
 ## ObjectManager\RbacProvider
@@ -32,17 +32,17 @@ The ObjectManager\RbacProvider takes an object manager and prepares the Rbac con
 configuration would look like:
 
 ```php
-return [
-    'spiffy_authorize' => [
-        'role_providers' => [
-            [
+return array(
+    'spiffy_authorize' => array(
+        'role_providers' => array(
+            array(
                 'name' => 'SpiffyAuthorize\Provider\Role\ObjectManager\RbacProvider',
-                'options' => [
+                'options' => array(
                     'object_manager' => 'Doctrine\ORM\EntityManager', // service manager name of object manager instance
                     'target_class' => 'SpiffyCms\Entity\Role', // role entity class
-                ]
-            ]
-        ]
-    ]
-];
+                )
+            )
+        )
+    )
+);
 ```

@@ -93,9 +93,10 @@ class AuthenticationProvider implements ProviderInterface
         }
 
         $identity = $this->getAuthService()->getIdentity();
+        $roles    = array();
         if ($identity instanceof IdentityInterface && 0 !== count($identity->getRoles())) {
-            $roles = $identity->getRoles();
-            foreach ($roles as $key => $role) {
+            $identityRoles = $identity->getRoles();
+            foreach ($identityRoles as $key => $role) {
                 if ($role instanceof Acl\Role\RoleInterface) {
                     $roles[$key] = $role->getRoleId();
                 } elseif ($role instanceof Rbac\RoleInterface) {

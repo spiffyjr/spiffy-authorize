@@ -10,21 +10,21 @@ The route guard sits between the dispatch and onRoute events in the MVC applicat
 option that defines the routes and resources that apply to each route. A sample configuration would look like:
 
 ```php
-return [
-    'spiffy_authorize' => [
-        'guards' => [
-            [
+return array(
+    'spiffy_authorize' => array(
+        'guards' => array(
+            array(
                 'name' => 'SpiffyAuthorize\Guard\RouteGuard',
-                'options' => [
-                    'rules' => [
-                        'my_route' => ['resource1', 'resource2'],
-                        'admin*'   => ['administrator']
-                    ]
-                ]
-            ]
-        ]
-    ]
-];
+                'options' => array(
+                    'rules' => array(
+                        'my_route' => array('resource1', 'resource2'),
+                        'admin*'   => array('administrator')
+                    )
+                )
+            )
+        )
+    )
+);
 ```
 
 Note: routes are matched via *regular expression* so you can do things like protect an entire endpoint (admin, for example).
@@ -35,23 +35,23 @@ The route params guard is identical to the route guard except the resources info
 route configuration. A sample configuration would look like:
 
 ```php
-return [
-    'router' => [
-        'routes' => [
-            'admin' => [
+return array(
+    'router' => array(
+        'routes' => array(
+            'admin' => array(
                 'type' => 'literal',
-                'options' => [
+                'options' => array(
                     'route'    => '/admin',
-                    'defaults' => [
+                    'defaults' => array(
                         'controller' => 'Application\Controller\Admin',
                         'action'     => 'index',
-                        'resources'  => [
+                        'resources'  => array(
                             'administrator' // access granted to administrator resource
-                        ]
-                    ],
-                ],
-            ],
-        ],
-    ],
-];
+                        )
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
 ```

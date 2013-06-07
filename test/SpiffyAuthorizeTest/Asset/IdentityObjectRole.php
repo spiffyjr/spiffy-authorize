@@ -26,9 +26,10 @@ class IdentityObjectRole implements IdentityInterface
      */
     public function getRoles()
     {
-        return array(
-            new ObjectRole('foo'),
-            new ObjectRole('bar')
+        return new \ArrayObject(array(
+                new ObjectRole('foo'),
+                new ObjectRole('bar')
+            )
         );
     }
 }

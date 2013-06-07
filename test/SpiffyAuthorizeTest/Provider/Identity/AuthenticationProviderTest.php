@@ -78,4 +78,21 @@ class AuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('foo','bar'), $result);
     }
+
+    public function testOriginalRolesAreNotModifiedOnCollection()
+    {
+        $identity = new IdentityObjectRole();
+        /** @var \ArrayObject $original */
+        $original = $identity->getRoles();
+        $original = clone $original;
+
+        $service = new AuthenticationService();
+        $service->getStorage()->write($identity);
+
+        $provider = new AuthenticationProvider();
+        $provider->setAuthService($service);
+        $provider->getIdentityRoles();
+
+        $this->assertEquals($original, $identity->getRoles());
+    }
 }
