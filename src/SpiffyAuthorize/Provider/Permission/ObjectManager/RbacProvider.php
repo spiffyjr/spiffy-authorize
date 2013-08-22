@@ -7,6 +7,7 @@ use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
 use SpiffyAuthorize\Provider\Permission;
 use SpiffyAuthorize\Provider\Role;
+use SpiffyAuthorize\Role\RoleInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
@@ -96,6 +97,8 @@ class RbacProvider extends AbstractOptions implements Permission\ProviderInterfa
             return $entity->getName();
         } else if ($entity instanceof Acl\Role\RoleInterface) {
             // todo: implement me
+        } else if ($entity instanceof RoleInterface) {
+            return $entity->getName();
         } else if (is_string($entity)) {
             return $entity;
         }

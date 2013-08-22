@@ -3,6 +3,7 @@
 namespace SpiffyAuthorize\Provider\Identity;
 
 use SpiffyAuthorize\Identity\IdentityInterface;
+use SpiffyAuthorize\Role\RoleInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
@@ -99,7 +100,9 @@ class AuthenticationProvider implements ProviderInterface
             foreach ($identityRoles as $key => $role) {
                 if ($role instanceof Acl\Role\RoleInterface) {
                     $roles[$key] = $role->getRoleId();
-                } elseif ($role instanceof Rbac\RoleInterface) {
+                } else if ($role instanceof Rbac\RoleInterface) {
+                    $roles[$key] = $role->getName();
+                } else if ($role instanceof RoleInterface) {
                     $roles[$key] = $role->getName();
                 } else if (is_object($role)) {
                     $roles[$key] = (string) $role;

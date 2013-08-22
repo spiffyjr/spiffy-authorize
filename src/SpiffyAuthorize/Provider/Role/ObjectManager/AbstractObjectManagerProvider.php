@@ -5,6 +5,7 @@ namespace SpiffyAuthorize\Provider\Role\ObjectManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
+use SpiffyAuthorize\Role\RoleInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
@@ -118,6 +119,8 @@ abstract class AbstractObjectManagerProvider extends AbstractOptions implements 
             return $entity->getName();
         } else if ($entity instanceof Acl\Role\RoleInterface) {
             // todo: implement me
+        } else if ($entity instanceof RoleInterface) {
+            return $entity->getName();
         } else if (is_string($entity)) {
             return $entity;
         }
