@@ -16,7 +16,7 @@ return array(
                 'name' => 'SpiffyAuthorize\Provider\Role\Config\RbacProvider',
                 'options' => array(
                     'rules' => array(
-                        'parent1' => array('child1,'child2','child3'),
+                        'parent1' => array('child1','child2','child3'),
                         'child2'  => array('subchild1')
                     )
                 )
