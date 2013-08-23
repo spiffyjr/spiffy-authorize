@@ -80,7 +80,7 @@ class RouteGuard extends AbstractGuard
                     'unable to test regex: "%s"',
                     $routeRegex
                 ));
-            } else if ($result) {
+            } elseif ($result) {
                 $resources = $this->rules[$routeRegex];
                 $isMatch   = true;
                 break;

@@ -114,9 +114,9 @@ class RbacProvider extends AbstractOptions implements Permission\ProviderInterfa
     {
         if ($entity instanceof Rbac\RoleInterface) {
             return $entity->getParent() ? $entity->getParent()->getName() : null;
-        } else if ($entity instanceof Acl\Role\RoleInterface) {
+        } elseif ($entity instanceof Acl\Role\RoleInterface) {
             // todo: implement me
-        } else if (is_string($entity)) {
+        } elseif (is_string($entity)) {
             return null;
         }
         return null;
@@ -149,7 +149,7 @@ class RbacProvider extends AbstractOptions implements Permission\ProviderInterfa
             if ($entity instanceof PermissionInterface) {
                 $permission = $entity->getName();
                 $roles      = $entity->getRoles();
-            } else if (is_array($entity)) {
+            } elseif (is_array($entity)) {
                 $permission = key($entity);
                 $roles      = current($entity);
 
