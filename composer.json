@@ -3,8 +3,9 @@
     "description": "ZF2 authorization module for SpiffyCMS (can be used standalone).",
     "homepage": "http://www.github.com/spiffyjr/spiffy-authorize.git",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "zendframework/zend-eventmanager": "2.*",
+        "zendframework/zend-http": "2.*",
         "zendframework/zend-stdlib": "2.*"
     },
     "suggest": {
@@ -18,13 +19,18 @@
         "phpunit/phpunit": "3.*",
         "spiffy/spiffy-test": "dev-master",
         "zendframework/zend-authentication": "2.*",
+        "zendframework/zend-config": "2.*",
+        "zendframework/zend-console": "2.*",
         "zendframework/zend-developer-tools": "dev-master",
+        "zendframework/zend-form": "2.*",
+        "zendframework/zend-loader": "2.*",
         "zendframework/zend-mvc": "2.*",
         "zendframework/zend-permissions-acl": "2.*",
         "zendframework/zend-permissions-rbac": "2.*",
         "zendframework/zend-serializer": "2.*",
         "zendframework/zend-servicemanager": "2.*",
-        "zendframework/zend-session": "2.*"
+        "zendframework/zend-session": "2.*",
+        "zendframework/zend-view": "2.*"
     },
     "autoload": {
         "psr-0": {
