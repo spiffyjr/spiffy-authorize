@@ -100,11 +100,11 @@ class AuthenticationProvider implements ProviderInterface
             foreach ($identityRoles as $key => $role) {
                 if ($role instanceof Acl\Role\RoleInterface) {
                     $roles[$key] = $role->getRoleId();
-                } else if ($role instanceof Rbac\RoleInterface) {
+                } elseif ($role instanceof Rbac\RoleInterface) {
                     $roles[$key] = $role->getName();
-                } else if ($role instanceof RoleInterface) {
+                } elseif ($role instanceof RoleInterface) {
                     $roles[$key] = $role->getName();
-                } else if (is_object($role)) {
+                } elseif (is_object($role)) {
                     $roles[$key] = (string) $role;
                 } else {
                     $roles[$key] = $role;
