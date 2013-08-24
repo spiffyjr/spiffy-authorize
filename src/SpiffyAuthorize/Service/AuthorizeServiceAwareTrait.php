@@ -11,7 +11,7 @@ trait AuthorizeServiceAwareTrait
 
     /**
      * @param AuthorizeServiceInterface $authorizeService
-     * @return mixed
+     * @return $this
      */
     public function setAuthorizeService(AuthorizeServiceInterface $authorizeService)
     {
@@ -20,7 +20,7 @@ trait AuthorizeServiceAwareTrait
     }
 
     /**
-     * @return \SpiffyAuthorize\Service\AuthorizeServiceInterface
+     * @return AuthorizeServiceInterface
      */
     public function getAuthorizeService()
     {
