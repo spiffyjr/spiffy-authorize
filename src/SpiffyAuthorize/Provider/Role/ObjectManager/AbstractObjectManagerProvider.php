@@ -138,6 +138,8 @@ abstract class AbstractObjectManagerProvider extends AbstractOptions implements 
             return $entity->getParent() ? $entity->getParent()->getName() : null;
         } else if ($entity instanceof Acl\Role\RoleInterface) {
             // todo: implement me
+        } else if ($entity instanceof RoleInterface) {
+            return $this->extractRole($entity->getParent());
         } else if (is_string($entity)) {
             return null;
         }
