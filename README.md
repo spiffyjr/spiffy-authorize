@@ -14,7 +14,7 @@ for more detailed documentation on the features provided by this module.
 
 ## Requirements
 
-* PHP 5.3.3
+* PHP 5.4
 * Composer
 
 ## Installation
