@@ -14,7 +14,7 @@ trait RbacProviderTrait
      * @param string|null $parentName
      * @return void
      */
-    protected function loadRoles($rbac, $roles, $parentName = null)
+    protected function loadRoles(Rbac $rbac, $roles, $parentName = null)
     {
         foreach ($roles as $parent => $children) {
             if (is_numeric($parent)) {
