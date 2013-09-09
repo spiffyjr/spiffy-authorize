@@ -2,7 +2,7 @@
 
 namespace SpiffyAuthorize\Service;
 
-use SpiffyAuthorize\Options\ModuleOptions;
+use SpiffyAuthorize\ModuleOptions;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -12,11 +12,11 @@ class OptionsModuleFactory implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Configuration');
-        return new ModuleOptions($config['spiffy_authorize']);
+        return new ModuleOptions(isset($config['spiffy_authorize']) ? $config['spiffy_authorize'] : []);
     }
 }

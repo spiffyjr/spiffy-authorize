@@ -17,8 +17,8 @@ class CollectorRoleFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \SpiffyAuthorize\Options\ModuleOptions $options */
-        $options  = $serviceLocator->get('SpiffyAuthorize\Options\ModuleOptions');
+        /** @var \SpiffyAuthorize\ModuleOptions $options */
+        $options  = $serviceLocator->get('SpiffyAuthorize\ModuleOptions');
         $provider = $serviceLocator->get($options->getIdentityProvider());
 
         return new RoleCollector($provider);

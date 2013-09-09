@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorize\View\Strategy;
+namespace SpiffyAuthorize\View;
 
 use SpiffyAuthorize\Exception\UnauthorizedException;
 use SpiffyAuthorize\Guard\RouteGuard;
@@ -23,7 +23,7 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
     protected $template = 'error/403';
 
     /**
-     * @var \Zend\Stdlib\CallbackHandlerarray()
+     * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 

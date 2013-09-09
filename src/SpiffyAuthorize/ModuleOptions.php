@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorize\Options;
+namespace SpiffyAuthorize;
 
 use Zend\Stdlib\AbstractOptions;
 
@@ -44,7 +44,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $viewStrategy = 'SpiffyAuthorize\View\Strategy\UnauthorizedStrategy';
+    protected $viewStrategy = 'SpiffyAuthorize\View\UnauthorizedStrategy';
 
     /**
      * @var string

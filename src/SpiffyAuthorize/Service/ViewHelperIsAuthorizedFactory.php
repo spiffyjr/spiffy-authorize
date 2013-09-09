@@ -2,18 +2,17 @@
 
 namespace SpiffyAuthorize\Service;
 
-use SpiffyAuthorize\Collector\PermissionCollector;
-use SpiffyAuthorize\Guard\RouteGuard;
+use SpiffyAuthorize\View\IsAuthorizedHelper;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CollectorPermissionFactory implements FactoryInterface
+class ViewHelperIsAuthorizedFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return PermissionCollector
+     * @return IsAuthorizedHelper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -21,6 +20,6 @@ class CollectorPermissionFactory implements FactoryInterface
         $options = $serviceLocator->get('SpiffyAuthorize\ModuleOptions');
         $service = $serviceLocator->get($options->getAuthorizeService());
 
-        return new PermissionCollector($service);
+        return new IsAuthorizedHelper($service);
     }
 }

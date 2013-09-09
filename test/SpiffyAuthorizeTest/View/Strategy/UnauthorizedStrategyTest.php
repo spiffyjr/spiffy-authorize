@@ -4,7 +4,7 @@ namespace SpiffyAuthorizeTest\View\Strategy;
 
 use SpiffyAuthorize\Exception\UnauthorizedException;
 use SpiffyAuthorize\Guard\RouteGuard;
-use SpiffyAuthorize\View\Strategy\UnauthorizedStrategy;
+use SpiffyAuthorize\View\UnauthorizedStrategy;
 use Zend\Console\Response as ConsoleResponse;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;

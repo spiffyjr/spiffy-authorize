@@ -2,7 +2,7 @@
 
 namespace SpiffyAuthorize\Service;
 
-use SpiffyAuthorize\View\Strategy\UnauthorizedStrategy;
+use SpiffyAuthorize\View\UnauthorizedStrategy;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -16,8 +16,8 @@ class ViewStrategyUnauthorizedFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \SpiffyAuthorize\Options\ModuleOptions $options */
-        $options  = $serviceLocator->get('SpiffyAuthorize\Options\ModuleOptions');
+        /** @var \SpiffyAuthorize\ModuleOptions $options */
+        $options  = $serviceLocator->get('SpiffyAuthorize\ModuleOptions');
         $strategy = new UnauthorizedStrategy();
         $strategy->setTemplate($options->getViewTemplate());
 

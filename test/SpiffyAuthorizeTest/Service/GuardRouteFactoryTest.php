@@ -3,7 +3,7 @@
 namespace SpiffyAuthorizeTest\Service;
 
 use Mockery as m;
-use SpiffyAuthorize\Options\ModuleOptions;
+use SpiffyAuthorize\ModuleOptions;
 use SpiffyAuthorize\Service\GuardRouteFactory;
 use SpiffyAuthorizeTest\Asset\AuthorizeService;
 use Zend\ServiceManager\ServiceManager;
@@ -17,7 +17,7 @@ class GuardRouteFactoryTest extends \PHPUnit_Framework_TestCase
 
         $sm = m::mock('Zend\ServiceManager\ServiceManager');
         $sm->shouldReceive('get')->with('AuthorizeService')->andReturn(new AuthorizeService());
-        $sm->shouldReceive('get')->with('SpiffyAuthorize\Options\ModuleOptions')->andReturn($options);
+        $sm->shouldReceive('get')->with('SpiffyAuthorize\ModuleOptions')->andReturn($options);
 
         $factory  = new GuardRouteFactory();
         $instance = $factory->createService($sm);

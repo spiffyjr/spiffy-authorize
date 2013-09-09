@@ -3,7 +3,7 @@
 namespace SpiffyAuthorizeTest\Service;
 
 use SpiffyAuthorize\AuthorizeEvent;
-use SpiffyAuthorize\Options\ModuleOptions;
+use SpiffyAuthorize\ModuleOptions;
 use SpiffyAuthorize\Service\RbacServiceFactory;
 use SpiffyAuthorizeTest\Asset\Identity;
 use SpiffyTest\Framework\TestCase;

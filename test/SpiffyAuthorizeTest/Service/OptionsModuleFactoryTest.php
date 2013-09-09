@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use SpiffyAuthorize\Service\OptionsModuleFactory;
 use Zend\ServiceManager\ServiceManager;
@@ -18,7 +18,7 @@ class OptionsModuleFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new OptionsModuleFactory();
         $options = $factory->createService($serviceManager);
-        $this->assertInstanceOf('SpiffyAuthorize\Options\ModuleOptions', $options);
+        $this->assertInstanceOf('SpiffyAuthorize\ModuleOptions', $options);
         $this->assertEquals('foo', $options->getDefaultRole());
     }
 }
