@@ -35,7 +35,7 @@
     "autoload": {
         "psr-0": {
             "SpiffyAuthorize": "src/",
-            "SpiffyAuthorizeTest": "test/"
+            "SpiffyAuthorizeTest": "tests/"
         }
     }
 }
