@@ -87,10 +87,7 @@ class RoleCollector implements
     }
 
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * String representation of object
-     * @link http://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
+     * {@inheritDoc}
      */
     public function serialize()
     {
@@ -98,13 +95,7 @@ class RoleCollector implements
     }
 
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Constructs the object
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
-     * @return void
+     * {@inheritDoc}
      */
     public function unserialize($serialized)
     {
@@ -113,7 +104,8 @@ class RoleCollector implements
 
     /**
      * Examines an entity and extracts the role if one is available.
-     * @param $entity
+     *
+     * @param  object|mixed $entity
      * @return null|string
      */
     public function extractRole($entity)
@@ -125,12 +117,14 @@ class RoleCollector implements
         } else if (is_string($entity)) {
             return $entity;
         }
+
         return null;
     }
 
     /**
      * Examines an entity and extracts the parent if one is available.
-     * @param $entity
+     *
+     * @param  object|string $entity
      * @return null|string
      */
     public function extractParent($entity)
@@ -142,6 +136,7 @@ class RoleCollector implements
         } else if (is_string($entity)) {
             return null;
         }
+
         return null;
     }
 }

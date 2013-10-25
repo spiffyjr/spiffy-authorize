@@ -9,6 +9,9 @@ use SpiffyAuthorize\Service\RbacService;
 use Zend\Mvc\MvcEvent;
 use ZendDeveloperTools\Collector\CollectorInterface;
 
+/**
+ * Collect the permissions for the Rbac service
+ */
 class PermissionCollector implements
     CollectorInterface,
     Serializable
@@ -77,7 +80,6 @@ class PermissionCollector implements
             return;
         }
 
-        /** @var \Zend\Permissions\Rbac\Rbac $rbac */
         $rbac        = $service->getContainer();
         $roles       = $provider->getIdentityRoles();
         $permissions = array();
