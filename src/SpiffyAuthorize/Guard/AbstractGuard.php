@@ -13,7 +13,6 @@ abstract class AbstractGuard extends AbstractOptions implements GuardInterface
     const INFO_NO_RULES            = 'info-no-rules';
     const INFO_UNKNOWN_ROUTE       = 'info-unknown-route';
     const ERROR_UNAUTHORIZED_ROUTE = 'error-unauthorized-route';
-    const RESOURCE_PREFIX          = 'route-';
 
     /**
      * @var AuthorizeServiceInterface
