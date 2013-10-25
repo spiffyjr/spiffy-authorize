@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorize\Service;
+namespace SpiffyAuthorize\Factory;
 
 use SpiffyAuthorize\Provider\Identity\AuthenticationProvider;
 use Zend\ServiceManager\FactoryInterface;

@@ -1,26 +1,26 @@
 <?php
 
-namespace SpiffyAuthorize\Service;
+namespace SpiffyAuthorize\Factory;
 
-use SpiffyAuthorize\View\UnauthorizedStrategy;
+use SpiffyAuthorize\Collector\RoleCollector;
+use SpiffyAuthorize\Guard\RouteGuard;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ViewStrategyUnauthorizedFactory implements FactoryInterface
+class CollectorRoleFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return RoleCollector
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /** @var \SpiffyAuthorize\ModuleOptions $options */
         $options  = $serviceLocator->get('SpiffyAuthorize\ModuleOptions');
-        $strategy = new UnauthorizedStrategy();
-        $strategy->setTemplate($options->getViewTemplate());
+        $provider = $serviceLocator->get($options->getIdentityProvider());
 
-        return $strategy;
+        return new RoleCollector($provider);
     }
 }

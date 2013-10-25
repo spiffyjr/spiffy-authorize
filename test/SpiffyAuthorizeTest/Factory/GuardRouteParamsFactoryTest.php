@@ -1,10 +1,10 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use Mockery as m;
 use SpiffyAuthorize\ModuleOptions;
-use SpiffyAuthorize\Service\GuardRouteParamsFactory;
+use SpiffyAuthorize\Factory\GuardRouteParamsFactory;
 use SpiffyAuthorizeTest\Asset\AuthorizeService;
 use Zend\ServiceManager\ServiceManager;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace SpiffyAuthorize\Service;
+namespace SpiffyAuthorize\Factory;
 
-use SpiffyAuthorize\Guard\RouteParamsGuard;
+use SpiffyAuthorize\Guard\RouteGuard;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class GuardRouteParamsFactory implements FactoryInterface
+class GuardRouteFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -18,7 +18,7 @@ class GuardRouteParamsFactory implements FactoryInterface
     {
         /** @var \SpiffyAuthorize\ModuleOptions $options */
         $options = $serviceLocator->get('SpiffyAuthorize\ModuleOptions');
-        $guard   = new RouteParamsGuard();
+        $guard   = new RouteGuard();
         $guard->setAuthorizeService($serviceLocator->get($options->getAuthorizeService()));
 
         return $guard;

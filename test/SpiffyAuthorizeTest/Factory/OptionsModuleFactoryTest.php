@@ -2,7 +2,7 @@
 
 namespace SpiffyAuthorizeTest\Factory;
 
-use SpiffyAuthorize\Service\OptionsModuleFactory;
+use SpiffyAuthorize\Factory\OptionsModuleFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class OptionsModuleFactoryTest extends \PHPUnit_Framework_TestCase

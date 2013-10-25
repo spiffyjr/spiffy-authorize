@@ -1,10 +1,10 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use Mockery as m;
 use SpiffyAuthorize\ModuleOptions;
-use SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory;
+use SpiffyAuthorize\Factory\ViewStrategyUnauthorizedFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class ViewStrategyUnauthorizedFactoryTest extends \PHPUnit_Framework_TestCase
