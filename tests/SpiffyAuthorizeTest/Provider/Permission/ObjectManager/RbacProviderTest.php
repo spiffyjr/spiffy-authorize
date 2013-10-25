@@ -30,8 +30,8 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionThrownWhenMissingTargetClass()
     {
-        $om = m::mock('Doctrine\ORM\EntityManager');
-        $om->shouldReceive('getRepository')->andReturn(m::mock('Doctrine\ORM\EntityRepository'));
+        $om = m::mock('Doctrine\Common\Persistence\ObjectManager');
+        $om->shouldReceive('getRepository')->andReturn(m::mock('Doctrine\Common\Persistence\ObjectRepository'));
 
         $permissions = new RbacProvider();
         $permissions->setObjectManager($om);
@@ -53,10 +53,10 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
             new Asset\Permission('bar', array('child2'))
         );
 
-        $or = m::mock('Doctrine\ORM\EntityRepository');
+        $or = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $om->shouldReceive('getRepository')->andReturn($or);
 
         $permissions = new RbacProvider();
@@ -82,10 +82,10 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
             array( 'baz' => 'child2' )
         );
 
-        $or = m::mock('Doctrine\ORM\EntityRepository');
+        $or = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $om->shouldReceive('getRepository')->andReturn($or);
 
         $permissions = new RbacProvider();
@@ -109,10 +109,10 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $result = array('foo');
         $roles  = new Asset\RbacRoleProvider();
 
-        $or = m::mock('Doctrine\ORM\EntityRepository');
+        $or = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $om->shouldReceive('getRepository')->andReturn($or);
 
         $permissions = new RbacProvider();
@@ -136,10 +136,10 @@ class RbacProviderTest extends \PHPUnit_Framework_TestCase
         $result = array( array( 'foo' ) );
         $roles  = new Asset\RbacRoleProvider();
 
-        $or = m::mock('Doctrine\ORM\EntityRepository');
+        $or = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $or->shouldReceive('findAll')->andReturn($result);
 
-        $om = m::mock('Doctrine\ORM\EntityManager');
+        $om = m::mock('Doctrine\Common\Persistence\ObjectManager');
         $om->shouldReceive('getRepository')->andReturn($or);
 
         $permissions = new RbacProvider();
