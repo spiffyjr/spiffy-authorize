@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
-use SpiffyAuthorize\Service\ProviderRoleFactory;
+use SpiffyAuthorize\Factory\ProviderRoleFactory;
 use SpiffyTest\Framework\TestCase;
 
 class ProviderRoleFactoryTest extends TestCase

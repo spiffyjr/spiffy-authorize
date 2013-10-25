@@ -1,9 +1,9 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use SpiffyAuthorize\ModuleOptions;
-use SpiffyAuthorize\Service\GuardFactory;
+use SpiffyAuthorize\Factory\GuardFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class GuardFactoryTest extends \PHPUnit_Framework_TestCase

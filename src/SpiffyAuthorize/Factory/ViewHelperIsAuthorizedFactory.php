@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyAuthorize\Service;
+namespace SpiffyAuthorize\Factory;
 
 use SpiffyAuthorize\View\IsAuthorizedHelper;
 use Zend\ServiceManager\FactoryInterface;

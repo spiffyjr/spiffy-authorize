@@ -1,11 +1,11 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use Mockery as m;
 use SpiffyAuthorize\ModuleOptions;
 use SpiffyAuthorize\Provider\Identity\AuthenticationProvider;
-use SpiffyAuthorize\Service\CollectorRoleFactory;
+use SpiffyAuthorize\Factory\CollectorRoleFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class CollectorRoleFactoryTest extends \PHPUnit_Framework_TestCase

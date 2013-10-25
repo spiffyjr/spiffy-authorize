@@ -36,25 +36,25 @@ return [
     'service_manager' => [
         'factories' => [
             // Services that do not have an associated class.
-            'SpiffyAuthorize\Guards'              => 'SpiffyAuthorize\Service\GuardFactory',
-            'SpiffyAuthorize\PermissionProviders' => 'SpiffyAuthorize\Service\ProviderPermissionFactory',
-            'SpiffyAuthorize\RoleProviders'       => 'SpiffyAuthorize\Service\ProviderRoleFactory',
-            'SpiffyAuthorize\ViewStrategy'        => 'SpiffyAuthorize\Service\ViewStrategyFactory',
+            'SpiffyAuthorize\Guards'              => 'SpiffyAuthorize\Factory\GuardFactory',
+            'SpiffyAuthorize\PermissionProviders' => 'SpiffyAuthorize\Factory\ProviderPermissionFactory',
+            'SpiffyAuthorize\RoleProviders'       => 'SpiffyAuthorize\Factory\ProviderRoleFactory',
+            'SpiffyAuthorize\ViewStrategy'        => 'SpiffyAuthorize\Factory\ViewStrategyFactory',
 
             // Services that map directly to a class.
-            'SpiffyAuthorize\Collector\PermissionCollector'            => 'SpiffyAuthorize\Service\CollectorPermissionFactory',
-            'SpiffyAuthorize\Collector\RoleCollector'                  => 'SpiffyAuthorize\Service\CollectorRoleFactory',
-            'SpiffyAuthorize\Guard\RouteGuard'                         => 'SpiffyAuthorize\Service\GuardRouteFactory',
-            'SpiffyAuthorize\Guard\RouteParamsGuard'                   => 'SpiffyAuthorize\Service\GuardRouteParamsFactory',
-            'SpiffyAuthorize\ModuleOptions'                            => 'SpiffyAuthorize\Service\OptionsModuleFactory',
+            'SpiffyAuthorize\Collector\PermissionCollector'            => 'SpiffyAuthorize\Factory\CollectorPermissionFactory',
+            'SpiffyAuthorize\Collector\RoleCollector'                  => 'SpiffyAuthorize\Factory\CollectorRoleFactory',
+            'SpiffyAuthorize\Guard\RouteGuard'                         => 'SpiffyAuthorize\Factory\GuardRouteFactory',
+            'SpiffyAuthorize\Guard\RouteParamsGuard'                   => 'SpiffyAuthorize\Factory\GuardRouteParamsFactory',
+            'SpiffyAuthorize\ModuleOptions'                            => 'SpiffyAuthorize\Factory\OptionsModuleFactory',
             'SpiffyAuthorize\Provider\Identity\AuthenticationProvider' => 'SpiffyAuthorize\Provider\Identity\AuthenticationProviderFactory',
-            'SpiffyAuthorize\Service\RbacService'                      => 'SpiffyAuthorize\Service\RbacServiceFactory',
-            'SpiffyAuthorize\View\UnauthorizedStrategy'                => 'SpiffyAuthorize\Service\ViewStrategyUnauthorizedFactory',
+            'SpiffyAuthorize\Service\RbacService'                      => 'SpiffyAuthorize\Factory\RbacServiceFactory',
+            'SpiffyAuthorize\View\UnauthorizedStrategy'                => 'SpiffyAuthorize\Factory\ViewStrategyUnauthorizedFactory',
         ],
     ],
     'view_helpers' => [
         'factories' => [
-            'isAuthorized' => 'SpiffyAuthorize\Service\ViewHelperIsAuthorizedFactory',
+            'isAuthorized' => 'SpiffyAuthorize\Factory\ViewHelperIsAuthorizedFactory',
         ]
     ],
     'view_manager' => [

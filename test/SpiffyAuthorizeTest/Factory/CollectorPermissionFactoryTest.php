@@ -1,11 +1,11 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use Mockery as m;
 use SpiffyAuthorize\ModuleOptions;
 use SpiffyAuthorize\Provider\Identity\AuthenticationProvider;
-use SpiffyAuthorize\Service\CollectorPermissionFactory;
+use SpiffyAuthorize\Factory\CollectorPermissionFactory;
 use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset\Identity;
 use SpiffyAuthorizeTest\Asset\RbacRoleProvider;

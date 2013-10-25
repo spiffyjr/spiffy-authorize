@@ -1,10 +1,10 @@
 <?php
 
-namespace SpiffyAuthorizeTest\Service;
+namespace SpiffyAuthorizeTest\Factory;
 
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\ModuleOptions;
-use SpiffyAuthorize\Service\RbacServiceFactory;
+use SpiffyAuthorize\Factory\RbacServiceFactory;
 use SpiffyAuthorizeTest\Asset\Identity;
 use SpiffyTest\Framework\TestCase;
 
