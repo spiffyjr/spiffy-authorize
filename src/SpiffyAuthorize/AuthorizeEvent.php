@@ -15,17 +15,17 @@ class AuthorizeEvent extends Event
     protected $authorizeService;
 
     /**
+     * Constructor
+     *
      * @param AuthorizeServiceInterface $authorizeService
-     * @return mixed
      */
-    public function setAuthorizeService(AuthorizeServiceInterface $authorizeService)
+    public function __construct(AuthorizeServiceInterface $authorizeService)
     {
         $this->authorizeService = $authorizeService;
-        return $this;
     }
 
     /**
-     * @return \SpiffyAuthorize\Service\AuthorizeServiceInterface
+     * @return AuthorizeServiceInterface
      */
     public function getAuthorizeService()
     {
