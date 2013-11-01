@@ -2,7 +2,10 @@
 
 namespace SpiffyAuthorize\Provider\Identity;
 
-interface ProviderInterface
+/**
+ * An identity provider is responsible to return the current identity role
+ */
+interface IdentityProviderInterface
 {
     /**
      * Gets the roles for the identity.

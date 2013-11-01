@@ -3,7 +3,7 @@
 namespace SpiffyAuthorize\Collector;
 
 use Serializable;
-use SpiffyAuthorize\Provider\Identity\ProviderInterface;
+use SpiffyAuthorize\Provider\Identity\IdentityProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
@@ -20,7 +20,7 @@ class RoleCollector implements
     const PRIORITY = 100;
 
     /**
-     * @var ProviderInterface
+     * @var IdentityProviderInterface
      */
     protected $identityProvider;
 
@@ -30,9 +30,9 @@ class RoleCollector implements
     protected $roles = array();
 
     /**
-     * @param ProviderInterface $identityProvider
+     * @param IdentityProviderInterface $identityProvider
      */
-    public function __construct(ProviderInterface $identityProvider)
+    public function __construct(IdentityProviderInterface $identityProvider)
     {
         $this->identityProvider = $identityProvider;
     }

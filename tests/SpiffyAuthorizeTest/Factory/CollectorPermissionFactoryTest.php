@@ -9,15 +9,15 @@ use SpiffyAuthorize\Factory\CollectorPermissionFactory;
 use SpiffyAuthorize\Service\RbacService;
 use SpiffyAuthorizeTest\Asset\Identity;
 use SpiffyAuthorizeTest\Asset\RbacRoleProvider;
+use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceManager;
 
 class CollectorPermissionFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testInstanceReturned()
     {
-        $identityProvider = new AuthenticationProvider();
-        $identityProvider->getAuthService()->getStorage()->write(new Identity());
+        $identityProvider = new AuthenticationProvider(new AuthenticationService());
+        $identityProvider->getAuthenticationService()->getStorage()->write(new Identity());
 
         $service = new RbacService();
         $service->setIdentityProvider($identityProvider);

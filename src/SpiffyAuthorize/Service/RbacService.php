@@ -5,7 +5,7 @@ namespace SpiffyAuthorize\Service;
 use Traversable;
 use RecursiveIteratorIterator;
 use SpiffyAuthorize\Assertion;
-use SpiffyAuthorize\Provider\Identity\ProviderInterface as IdentityProviderInterface;
+use SpiffyAuthorize\Provider\Identity\IdentityProviderInterface;
 use SpiffyAuthorize\AuthorizeEvent;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
