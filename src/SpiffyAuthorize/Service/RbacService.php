@@ -224,8 +224,7 @@ class RbacService implements AuthorizeServiceInterface
         if (!$this->container) {
             $this->container = new Permissions\Rbac\Rbac();
 
-            $event = new AuthorizeEvent();
-            $event->setAuthorizeService($this);
+            $event = new AuthorizeEvent($this);
             $event->setTarget($this->container);
 
             $this->getEventManager()->trigger(AuthorizeEvent::EVENT_INIT, $event);
