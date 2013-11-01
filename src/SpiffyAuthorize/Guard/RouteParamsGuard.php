@@ -6,13 +6,13 @@ use SpiffyAuthorize\Exception\RuntimeException;
 use Zend\Mvc\MvcEvent;
 
 /**
- * A guard that checks for a 'permissions' param for the matched route,
+ * A guard that checks for a 'permissions' param for the matched route
  */
 class RouteParamsGuard extends AbstractGuard
 {
     /**
-     * @param MvcEvent $e
-     * @throws RuntimeException if regex could not be checked
+     * @param  MvcEvent $e
+     * @throws RuntimeException If regex could not be checked
      */
     public function onRoute(MvcEvent $e)
     {

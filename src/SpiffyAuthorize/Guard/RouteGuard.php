@@ -23,12 +23,14 @@ class RouteGuard extends AbstractGuard
     protected $rules = array();
 
     /**
+     * Set the rules
+     *
      * @param array $rules
-     * @return RouteGuard
+     * @return void
      */
     public function setRules(array $rules)
     {
-        $cleaned = array();
+        $cleanedRules = array();
 
         foreach ($rules as $route => $permissions) {
             if (is_numeric($permissions)) {
@@ -36,17 +38,15 @@ class RouteGuard extends AbstractGuard
                 $permissions = array();
             }
 
-            if (!is_array($permissions)) {
-                $permissions = array($permissions);
-            }
-
-            $cleaned[$route] = $permissions;
+            $cleanedRules[$route] = (array) $permissions;
         }
-        $this->rules = $cleaned;
-        return $this;
+
+        $this->rules = $cleanedRules;
     }
 
     /**
+     * Get the rules
+     *
      * @return array
      */
     public function getRules()
@@ -55,12 +55,13 @@ class RouteGuard extends AbstractGuard
     }
 
     /**
-     * @param MvcEvent $e
-     * @throws RuntimeException if regex could not be checked
+     * @param  MvcEvent $e
+     * @throws RuntimeException If regex could not be checked
+     * @return void
      */
     public function onRoute(MvcEvent $e)
     {
-        if (0 === count($this->getRules())) {
+        if (empty($this->rules)) {
             $e->setParam('guard-result', self::INFO_NO_RULES);
             return;
         }
@@ -73,11 +74,11 @@ class RouteGuard extends AbstractGuard
         $resources   = array();
 
         foreach (array_keys($this->rules) as $routeRegex) {
-            $result = @preg_match("/{$routeRegex}/", $routeName);
+            $result = preg_match("/{$routeRegex}/", $routeName);
 
             if (false === $result) {
                 throw new RuntimeException(sprintf(
-                    'unable to test regex: "%s"',
+                    'Unable to test regex: "%s"',
                     $routeRegex
                 ));
             } elseif ($result) {
