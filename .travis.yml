@@ -11,3 +11,8 @@ before_install:
 
 script:
  - ../vendor/bin/phpunit
+ - ../vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml --exclude-group Performance
+ - ../vendor/bin/phpunit --group=Functional
+
+after_script:
+ - php vendor/bin/coveralls -v
