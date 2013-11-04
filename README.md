@@ -5,6 +5,7 @@ module as well.
 
 ## Project Status
 [![Master Branch Build Status](https://secure.travis-ci.org/spiffyjr/spiffy-authorize.png?branch=master)](http://travis-ci.org/spiffyjr/spiffy-authorize)
+[![Coverage Status](https://coveralls.io/repos/spiffyjr/spiffy-authorize/badge.png?branch=master)](https://coveralls.io/r/spiffyjr/spiffy-authorize?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/51a345b9d2eb58000200ac03/badge.png)](https://www.versioneye.com/user/projects/51a345b9d2eb58000200ac03)
 
 ## Documentation
