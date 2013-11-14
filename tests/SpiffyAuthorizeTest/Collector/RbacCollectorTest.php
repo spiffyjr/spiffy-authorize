@@ -30,8 +30,7 @@ class RbacCollectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function getCollector()
     {
-        $provider  = new AuthenticationProvider();
-        $provider->setAuthService(new AuthenticationService());
+        $provider  = new AuthenticationProvider(new AuthenticationService());
 
         $collector = new RoleCollector($provider);
         $collector->collect(new MvcEvent());

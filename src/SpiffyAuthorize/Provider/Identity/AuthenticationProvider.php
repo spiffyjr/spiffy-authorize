@@ -8,8 +8,16 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Permissions\Acl;
 use Zend\Permissions\Rbac;
 
-class AuthenticationProvider implements ProviderInterface
+/**
+ * Identity provider that fetches identity from the standard ZF2 authentication service
+ */
+class AuthenticationProvider implements IdentityProviderInterface
 {
+    /**
+     * @var AuthenticationService
+     */
+    protected $authService;
+
     /**
      * @var string
      */
@@ -21,39 +29,30 @@ class AuthenticationProvider implements ProviderInterface
     protected $defaultRole = 'member';
 
     /**
-     * @var AuthenticationService
-     */
-    protected $authService;
-
-    /**
+     * Constructor
+     *
      * @param AuthenticationService $authService
-     * @return AuthenticationProvider
      */
-    public function setAuthService(AuthenticationService $authService)
+    public function __construct(AuthenticationService $authService)
     {
         $this->authService = $authService;
-        return $this;
     }
 
     /**
      * @return AuthenticationService
      */
-    public function getAuthService()
+    public function getAuthenticationService()
     {
-        if (!$this->authService) {
-            $this->authService = new AuthenticationService();
-        }
         return $this->authService;
     }
 
     /**
-     * @param string $defaultRole
-     * @return AuthenticationProvider
+     * @param  string $defaultRole
+     * @return void
      */
     public function setDefaultRole($defaultRole)
     {
         $this->defaultRole = $defaultRole;
-        return $this;
     }
 
     /**
@@ -65,13 +64,12 @@ class AuthenticationProvider implements ProviderInterface
     }
 
     /**
-     * @param string $defaultGuestRole
-     * @return AuthenticationProvider
+     * @param  string $defaultGuestRole
+     * @return void
      */
     public function setDefaultGuestRole($defaultGuestRole)
     {
         $this->defaultGuestRole = $defaultGuestRole;
-        return $this;
     }
 
     /**
@@ -89,14 +87,16 @@ class AuthenticationProvider implements ProviderInterface
      */
     public function getIdentityRoles()
     {
-        if (!$this->getAuthService()->hasIdentity()) {
+        if (!$this->authService->hasIdentity()) {
             return array($this->getDefaultGuestRole());
         }
 
-        $identity = $this->getAuthService()->getIdentity();
+        $identity = $this->authService->getIdentity();
         $roles    = array();
+
         if ($identity instanceof IdentityInterface && 0 !== count($identity->getRoles())) {
             $identityRoles = $identity->getRoles();
+
             foreach ($identityRoles as $key => $role) {
                 if ($role instanceof Acl\Role\RoleInterface) {
                     $roles[$key] = $role->getRoleId();
@@ -110,6 +110,7 @@ class AuthenticationProvider implements ProviderInterface
                     $roles[$key] = $role;
                 }
             }
+
             return $roles;
         }
 

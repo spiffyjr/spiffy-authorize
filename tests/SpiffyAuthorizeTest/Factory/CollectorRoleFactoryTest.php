@@ -6,7 +6,7 @@ use Mockery as m;
 use SpiffyAuthorize\ModuleOptions;
 use SpiffyAuthorize\Provider\Identity\AuthenticationProvider;
 use SpiffyAuthorize\Factory\CollectorRoleFactory;
-use Zend\ServiceManager\ServiceManager;
+use Zend\Authentication\AuthenticationService;
 
 class CollectorRoleFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +16,9 @@ class CollectorRoleFactoryTest extends \PHPUnit_Framework_TestCase
         $options->setIdentityProvider('IdentityProvider');
 
         $sm = m::mock('Zend\ServiceManager\ServiceManager');
-        $sm->shouldReceive('get')->with('IdentityProvider')->andReturn(new AuthenticationProvider());
+        $sm->shouldReceive('get')->with('IdentityProvider')->andReturn(
+            new AuthenticationProvider(new AuthenticationService())
+        );
         $sm->shouldReceive('get')->with('SpiffyAuthorize\ModuleOptions')->andReturn($options);
 
         $factory  = new CollectorRoleFactory();
