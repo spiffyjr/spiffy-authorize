@@ -39,7 +39,7 @@ return array(
     'spiffy_authorize' => array(
         'guards' => array(
             array(
-                'type'    => 'SpiffyAuthorize\Guard\RouteGuard',
+                'name'    => 'SpiffyAuthorize\Guard\RouteGuard',
                 'options' => array(
                     'rules' => array(
                         'my_route' => array('resource1', 'resource2'),
