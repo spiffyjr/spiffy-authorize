@@ -3,6 +3,7 @@
 namespace SpiffyAuthorize\Provider\Permission\ObjectManager;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Permission\PermissionInterface;
 use SpiffyAuthorize\Provider\Permission;
@@ -130,7 +131,10 @@ class RbacProvider extends AbstractOptions implements Permission\ProviderInterfa
      */
     public function load(AuthorizeEvent $e)
     {
-        if (!$this->getObjectManager()) {
+        /** @var \Doctrine\ORM\EntityManager $objectManager */
+        $objectManager = $this->getObjectManager();
+
+        if (!$objectManager) {
             throw new Permission\Exception\RuntimeException('No object_manager was set.');
         }
 
@@ -140,7 +144,19 @@ class RbacProvider extends AbstractOptions implements Permission\ProviderInterfa
 
         /** @var \Zend\Permissions\Rbac\Rbac $rbac */
         $rbac   = $e->getTarget();
-        $result = $this->getObjectManager()->getRepository($this->getTargetClass())->findAll();
+
+        if ($objectManager instanceof EntityManager) {
+            $qb = $objectManager->getRepository($this->getTargetClass())->createQueryBuilder('resources');
+            $qb->select(['resources', 'roles'])
+                ->leftJoin('resources.roles', 'roles');
+
+            $query = $qb->getQuery();
+            $query->useResultCache(true);
+
+            $result = $query->getResult();
+        } else {
+            $result = $objectManager->getRepository($this->getTargetClass())->findAll();
+        }
 
         foreach ($result as $entity) {
             $permission = null;
