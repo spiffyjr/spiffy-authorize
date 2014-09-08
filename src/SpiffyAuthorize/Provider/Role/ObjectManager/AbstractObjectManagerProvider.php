@@ -3,6 +3,7 @@
 namespace SpiffyAuthorize\Provider\Role\ObjectManager;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use SpiffyAuthorize\AuthorizeEvent;
 use SpiffyAuthorize\Provider\Role\ProviderInterface;
 use SpiffyAuthorize\Role\RoleInterface;
@@ -89,7 +90,22 @@ abstract class AbstractObjectManagerProvider extends AbstractOptions implements 
      */
     public function load(AuthorizeEvent $e)
     {
-        $result = $this->getObjectManager()->getRepository($this->getTargetClass())->findAll();
+        /** @var \Doctrine\ORM\EntityManager $objectManager */
+        $objectManager = $this->getObjectManager();
+
+        if ($objectManager instanceof EntityManager) {
+            $qb = $objectManager->getRepository($this->getTargetClass())->createQueryBuilder('roles');
+            $qb->select(array('roles', 'parent'))
+                ->leftJoin('roles.parent', 'parent');
+
+            $query = $qb->getQuery();
+            $query->useResultCache(true);
+
+            $result = $query->getResult();
+        } else {
+            $result = $objectManager->getRepository($this->getTargetClass())->findAll();
+        }
+
         $roles  = array();
 
         foreach ($result as $entity) {
